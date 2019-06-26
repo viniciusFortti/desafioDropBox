@@ -20,6 +20,6 @@ public class serverInit {
 
         // start the server
         FtpServer server = serverFactory.createServer();
-        server.start();
+        //server.start();
     }
 }
