@@ -5,6 +5,8 @@ import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.listener.ListenerFactory;
+import org.apache.ftpserver.usermanager.impl.BaseUser;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -45,8 +47,15 @@ public class ConfigurationServer {
         connectionConfigFactory.setMaxLogins(10);
         connectionConfigFactory.setMaxThreads(10);
 
+
         serverFactory.addListener("default", listenerFactory.createListener());
         serverFactory.setConnectionConfig(connectionConfigFactory.createConnectionConfig());
+        serverFactory.setConnectionConfig(connectionConfigFactory.createConnectionConfig());
+
+        BaseUser user = new BaseUser();
+        user.setName("admin");
+        user.setPassword("admin");
+        serverFactory.getUserManager().save(user);
 
         server = serverFactory.createServer();
         try {
