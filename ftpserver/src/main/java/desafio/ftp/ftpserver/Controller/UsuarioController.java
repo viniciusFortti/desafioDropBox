@@ -30,10 +30,11 @@ public class UsuarioController{
         return usuarioService.buscarUsuario(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/")
     @ResponseBody
-    public void removerUsuario(Usuario usuario) {
-         usuarioService.removerUsuario(usuario);
+    public String removerUsuario( @RequestBody Usuario usuario) {
+        usuarioService.removerUsuario(usuario);
+        return "Usuario removido com sucesso";
     }
 
     @GetMapping(value = "/")

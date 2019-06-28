@@ -43,6 +43,9 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     testCompile group: 'org.apache.ftpserver', name: 'ftpserver-core', version: '1.1.1'
+    compile group: 'org.apache.ftpserver', name: 'ftplet-api', version: '1.1.1'
+    compile group: 'org.apache.mina', name: 'mina-filter-compression', version: '2.1.3'
+
 
 }
 
