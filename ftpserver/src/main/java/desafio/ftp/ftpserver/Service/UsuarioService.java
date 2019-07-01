@@ -2,9 +2,15 @@ package desafio.ftp.ftpserver.Service;
 
 import desafio.ftp.ftpserver.Model.Usuario;
 import desafio.ftp.ftpserver.Repository.UsuarioRepository;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +32,7 @@ public class UsuarioService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Usuario editarUsuario(long id, Usuario usuario) {
+    public Usuario editarUsuario(String id, Usuario usuario) {
         usuario.setId(id);
         return usuarioRepository.save(usuario);
     }
@@ -39,5 +45,36 @@ public class UsuarioService {
     public List<Usuario> allUsuarios() {
         return (List<Usuario>) usuarioRepository.findAll();
     }
+
+  /*  @PostMapping("/")
+    public String handleFileUpload(@RequestParam("file") MultipartFile file,
+                                   RedirectAttributes redirectAttributes) {
+        String FTP_ADDRESS = "127.0.0.1:8081";
+        String LOGIN = "admin";
+        String PSW = "admin";
+
+        FTPClient con = null;
+
+        try {
+            con = new FTPClient();
+            con.connect(FTP_ADDRESS);
+
+            if (con.login(LOGIN, PSW)) {
+                con.enterLocalPassiveMode(); // important!
+                con.setFileType(FTP.BINARY_FILE_TYPE);
+
+                boolean result = con.storeFile(file.getOriginalFilename(), file.getInputStream());
+                con.logout();
+                con.disconnect();
+                redirectAttributes.addFlashAttribute("message",
+                        "You successfully uploaded " + file.getOriginalFilename() + "!");
+            }
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message",
+                    "Could not upload " + file.getOriginalFilename() + "!");
+        }
+
+        return "redirect:/";
+    }*/
 
 }

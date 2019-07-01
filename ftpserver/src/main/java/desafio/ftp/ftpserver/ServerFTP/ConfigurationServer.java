@@ -1,5 +1,6 @@
 package desafio.ftp.ftpserver.ServerFTP;
 
+import org.apache.commons.net.ftp.FTPClient;
 import org.apache.ftpserver.ConnectionConfigFactory;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
@@ -20,32 +21,22 @@ public class ConfigurationServer {
 
     private FtpServerFactory serverFactory;
     private FtpServer server;
-    private static int port;
+    private static int port = 8081;
 
-    public ConfigurationServer() {
-        port = 8081;
-    }
-
-
-    public void setPort(int port) {
-        this.port = port;
-    }
 
     public boolean start() throws FtpException {
         serverFactory = new FtpServerFactory();
+        FTPClient ftp = new FTPClient();
 
-
-        // Configurar listener
         ListenerFactory listenerFactory = new ListenerFactory();
         listenerFactory.setPort(port);
         listenerFactory.setIdleTimeout(60);
 
-
-        // Configurar conexão
         ConnectionConfigFactory connectionConfigFactory = new ConnectionConfigFactory();
         connectionConfigFactory.setAnonymousLoginEnabled(true);
         connectionConfigFactory.setMaxLogins(10);
         connectionConfigFactory.setMaxThreads(10);
+
 
 
         serverFactory.addListener("default", listenerFactory.createListener());
@@ -53,9 +44,10 @@ public class ConfigurationServer {
         serverFactory.setConnectionConfig(connectionConfigFactory.createConnectionConfig());
 
         BaseUser user = new BaseUser();
-        user.setName("admin");
-        user.setPassword("admin");
+        user.setName("myUserAdmin");
+        user.setPassword("abc123");
         serverFactory.getUserManager().save(user);
+
 
         server = serverFactory.createServer();
         try {

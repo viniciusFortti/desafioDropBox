@@ -1,12 +1,14 @@
 package desafio.ftp.ftpserver.Model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 public class Usuario {
 
     @Id
-    private Long id;
 
+    private String id;
+    @Indexed(unique=true)
     private String nome;
 
     private String cpf;
@@ -14,12 +16,6 @@ public class Usuario {
     private String email;
 
     private String senha;
-
-    private String login;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -37,19 +33,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
