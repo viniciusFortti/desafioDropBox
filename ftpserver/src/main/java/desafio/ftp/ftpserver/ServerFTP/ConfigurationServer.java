@@ -1,22 +1,21 @@
 package desafio.ftp.ftpserver.ServerFTP;
 
+import desafio.ftp.ftpserver.Login.Login;
+import desafio.ftp.ftpserver.Login.UserManagerClass;
 import org.apache.commons.net.ftp.FTPClient;
+
 import org.apache.ftpserver.ConnectionConfigFactory;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.listener.ListenerFactory;
-import org.apache.ftpserver.usermanager.impl.BaseUser;
+import org.apache.ftpserver.ftplet.Ftplet;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ConfigurationServer {
-    private static final Logger logger = LoggerFactory.getLogger(FtpServer.class);
-    private static Marker marker = MarkerFactory.getMarker("ftp-server");
 
 
     private FtpServerFactory serverFactory;
@@ -33,32 +32,27 @@ public class ConfigurationServer {
         listenerFactory.setIdleTimeout(60);
 
         ConnectionConfigFactory connectionConfigFactory = new ConnectionConfigFactory();
-        connectionConfigFactory.setAnonymousLoginEnabled(true);
+        connectionConfigFactory.setAnonymousLoginEnabled(false);
         connectionConfigFactory.setMaxLogins(10);
         connectionConfigFactory.setMaxThreads(10);
 
-
+        Map<String, Ftplet> map = new HashMap<>();
+        map.put("myFtpler", new Login());
 
         serverFactory.addListener("default", listenerFactory.createListener());
+        serverFactory.setFtplets(map);
         serverFactory.setConnectionConfig(connectionConfigFactory.createConnectionConfig());
         serverFactory.setConnectionConfig(connectionConfigFactory.createConnectionConfig());
-
-        BaseUser user = new BaseUser();
-        user.setName("myUserAdmin");
-        user.setPassword("abc123");
-        serverFactory.getUserManager().save(user);
-
-
+        serverFactory.setUserManager(UserManagerClass.getUserManager());
         server = serverFactory.createServer();
+
         try {
             server.start();
         } catch (FtpException e) {
-            logger.info(marker, "ERRO SERVIDOR NAO RODOU !", e.getMessage());
-            return false;
+            e.getMessage();
         }
         return true;
     }
-
 
     public void stop() {
         if(server != null && !server.isStopped()) {
