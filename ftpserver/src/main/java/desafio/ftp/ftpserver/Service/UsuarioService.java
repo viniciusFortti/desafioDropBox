@@ -46,35 +46,4 @@ public class UsuarioService {
         return (List<Usuario>) usuarioRepository.findAll();
     }
 
-  /*  @PostMapping("/")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
-        String FTP_ADDRESS = "127.0.0.1:8081";
-        String LOGIN = "admin";
-        String PSW = "admin";
-
-        FTPClient con = null;
-
-        try {
-            con = new FTPClient();
-            con.connect(FTP_ADDRESS);
-
-            if (con.login(LOGIN, PSW)) {
-                con.enterLocalPassiveMode(); // important!
-                con.setFileType(FTP.BINARY_FILE_TYPE);
-
-                boolean result = con.storeFile(file.getOriginalFilename(), file.getInputStream());
-                con.logout();
-                con.disconnect();
-                redirectAttributes.addFlashAttribute("message",
-                        "You successfully uploaded " + file.getOriginalFilename() + "!");
-            }
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("message",
-                    "Could not upload " + file.getOriginalFilename() + "!");
-        }
-
-        return "redirect:/";
-    }*/
-
 }
