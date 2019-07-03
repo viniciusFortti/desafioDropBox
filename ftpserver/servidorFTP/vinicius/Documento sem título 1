@@ -1,0 +1,19 @@
+Padronização API : seguir uma linha de raciocinio, caso mapeie "produto" deve seguir mapeando no singular ex : "cliente","relatorio". Pode se usar tanto singular quanto plural.
+
+nome composto : errado tarifaExportacao, correto é tarifas-exportacao.
+
+evitar abreviação : ex clt para clientes.
+
+evitar usar verbos na hora de mapear.
+
+evitar barra no final do mapeamento.
+
+evitar colocar o tipo de formato de resposta.
+
+identificador de um recurso : nao precisa ser chave primaria, pode ser qualquer atributos.
+
+status : 
+
+documente sua api. 
+
+prefira json. 

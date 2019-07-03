@@ -1,7 +1,7 @@
 package desafio.ftp.ftpserver.ServerFTP;
 
 import desafio.ftp.ftpserver.Login.Login;
-import desafio.ftp.ftpserver.Login.UserManagerClass;
+import desafio.ftp.ftpserver.Login.UserManagerCustom;
 import org.apache.commons.net.ftp.FTPClient;
 
 import org.apache.ftpserver.ConnectionConfigFactory;
@@ -20,30 +20,24 @@ public class ConfigurationServer {
 
     private FtpServerFactory serverFactory;
     private FtpServer server;
-    private static int port = 8081;
 
-
-    public boolean start() throws FtpException {
+    public boolean start() {
         serverFactory = new FtpServerFactory();
-        FTPClient ftp = new FTPClient();
 
         ListenerFactory listenerFactory = new ListenerFactory();
-        listenerFactory.setPort(port);
-        listenerFactory.setIdleTimeout(60);
+        listenerFactory.setPort(8081);
+        listenerFactory.setIdleTimeout(120);
 
         ConnectionConfigFactory connectionConfigFactory = new ConnectionConfigFactory();
         connectionConfigFactory.setAnonymousLoginEnabled(false);
-        connectionConfigFactory.setMaxLogins(10);
-        connectionConfigFactory.setMaxThreads(10);
 
         Map<String, Ftplet> map = new HashMap<>();
-        map.put("myFtpler", new Login());
+        map.put("FtpletListeners", new Login());
 
         serverFactory.addListener("default", listenerFactory.createListener());
         serverFactory.setFtplets(map);
         serverFactory.setConnectionConfig(connectionConfigFactory.createConnectionConfig());
-        serverFactory.setConnectionConfig(connectionConfigFactory.createConnectionConfig());
-        serverFactory.setUserManager(UserManagerClass.getUserManager());
+        serverFactory.setUserManager(UserManagerCustom.criaUserManager());
         server = serverFactory.createServer();
 
         try {
@@ -55,7 +49,7 @@ public class ConfigurationServer {
     }
 
     public void stop() {
-        if(server != null && !server.isStopped()) {
+        if(!server.isStopped()) {
             server.stop();
             server = null;
         }

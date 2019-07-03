@@ -16,15 +16,11 @@ public class Login implements Ftplet {
     @Override
     public FtpletResult beforeCommand(FtpSession session, FtpRequest request) throws FtpException, IOException {
         String command = request.getCommand();
-        if (!command.contains("USER") && !command.contains("PASS") && !command.endsWith(".delete")){
-            return null;
-        }else {
-            if ((command.contains("USER") || command.contains("PASS")) && !request.getArgument().endsWith(".delete")) {
-                UserManagerClass.criarNovoUsuario(request, command);
-                return null;
-            }
-        }
-        return null;
+
+            if ((command.contains("USER") || command.contains("PASS"))) {
+                UserManagerCustom.criarNovoUsuario(request,command);
+                return FtpletResult.DEFAULT;
+            }return FtpletResult.DEFAULT;
     }
 
     @Override
