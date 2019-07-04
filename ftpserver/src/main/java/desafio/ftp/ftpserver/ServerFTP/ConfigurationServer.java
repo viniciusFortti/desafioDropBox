@@ -2,7 +2,6 @@ package desafio.ftp.ftpserver.ServerFTP;
 
 import desafio.ftp.ftpserver.Login.Login;
 import desafio.ftp.ftpserver.Login.UserManagerCustom;
-import org.apache.commons.net.ftp.FTPClient;
 
 import org.apache.ftpserver.ConnectionConfigFactory;
 import org.apache.ftpserver.FtpServer;

@@ -3,44 +3,41 @@ package desafio.ftp.ftpserver.Controller;
 import desafio.ftp.ftpserver.Model.Usuario;
 import desafio.ftp.ftpserver.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/usuarios")
 public class UsuarioController{
 
     @Autowired
     UsuarioService usuarioService;
 
-    @PostMapping(value = "/")
-    @ResponseBody
+    @PostMapping(value = "")
     public Usuario salvar(@RequestBody Usuario usuario) {
         return usuarioService.salvar(usuario);
     }
 
     @GetMapping(value = "/{id}")
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
     public Optional<Usuario> buscarPorId(@PathVariable int id) {
         return usuarioService.buscarUsuario(id);
     }
 
-    @DeleteMapping(value = "/")
-    @ResponseBody
-    public String removerUsuario( @RequestBody Usuario usuario) {
-        usuarioService.removerUsuario(usuario);
-        return "Usuario removido com sucesso";
+    @DeleteMapping(value = "")
+    public Usuario removerUsuario( @RequestBody Usuario usuario) {
+        return usuarioService.removerUsuario(usuario);
     }
 
-    @GetMapping(value = "/")
-    @ResponseBody
-    public List<Usuario> buscarAll() {
-        return usuarioService.allUsuarios();
+    @PutMapping(value ="")
+    public Usuario editarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {
+        return usuarioService.editarUsuario(id,usuario);
+    }
+
+    @GetMapping(value = "")
+    public List<Usuario> listarUsuarios() {
+        return usuarioService.listarUsuarios();
     }
 
 }
