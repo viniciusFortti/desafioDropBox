@@ -18,7 +18,6 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    @SuppressWarnings("unused")
     public Optional<Usuario> buscarUsuario(long id) {
         return usuarioRepository.findById(id);
     }
@@ -28,12 +27,17 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario removerUsuario( Usuario usuario)  {
-        usuarioRepository.delete(usuario);
-        return usuario;
+    public void removerUsuario( Long id)  {
+        usuarioRepository.deleteById(id);
     }
 
-    public List<Usuario> listarUsuarios() {return (List<Usuario>) usuarioRepository.findAll();
+    public List<Usuario> listarUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
+    public List<Usuario> buscarPorNome(String nome){
+        return usuarioRepository.findByNomeContainingIgnoreCase(nome);
+
     }
 
 }

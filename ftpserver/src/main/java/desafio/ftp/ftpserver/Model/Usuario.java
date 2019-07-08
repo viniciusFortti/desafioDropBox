@@ -1,22 +1,27 @@
 package desafio.ftp.ftpserver.Model;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Document(collection = "usuario")
 public class Usuario {
 
     @Id
+    @NotNull
     private Long id;
-
-    @Indexed(unique=true)
+    @NotNull
     private String nome;
-
+    @NotNull
+    @CPF
     private String cpf;
-
+    @NotNull
+    @Email
     private String email;
-
+    @NotNull
     private String senha;
 
     public String getEmail() {
