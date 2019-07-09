@@ -1,4 +1,4 @@
-package desafio.ftp.ftpserver.Model;
+package desafio.ftp.ftpserver.model;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.Id;
@@ -6,12 +6,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+
 
 @Document(collection = "usuario")
 public class Usuario {
 
     @Id
-    @NotNull
     private Long id;
     @NotNull
     private String nome;
@@ -23,6 +24,16 @@ public class Usuario {
     private String email;
     @NotNull
     private String senha;
+
+    private List<Usuario> amigos;
+
+    public List<Usuario> getAmigos() {
+        return amigos;
+    }
+
+    public void setAmigos(List<Usuario> amigos) {
+        this.amigos = amigos;
+    }
 
     public String getEmail() {
         return email;

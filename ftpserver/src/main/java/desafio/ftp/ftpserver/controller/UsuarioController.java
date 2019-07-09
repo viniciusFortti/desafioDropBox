@@ -1,8 +1,10 @@
-package desafio.ftp.ftpserver.Controller;
+package desafio.ftp.ftpserver.controller;
 
-import desafio.ftp.ftpserver.Exceptions.ExceptionUtil;
-import desafio.ftp.ftpserver.Model.Usuario;
-import desafio.ftp.ftpserver.Service.UsuarioService;
+import desafio.ftp.ftpserver.exceptions.ExceptionUtil;
+import desafio.ftp.ftpserver.login.UserManagerCustom;
+import desafio.ftp.ftpserver.model.Usuario;
+import desafio.ftp.ftpserver.service.UsuarioService;
+import org.apache.ftpserver.ftplet.FtpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,19 +37,26 @@ public class UsuarioController{
     public List<Usuario> listarUsuarios() {return usuarioService.listarUsuarios();}
 
     @PostMapping
-    public Usuario salvar(@RequestBody Usuario usuario) {
+    public Usuario salvar(@RequestBody Usuario usuario) throws FtpException {
+        UserManagerCustom.salvaUsuario(usuario.getNome(),usuario.getSenha());
         exceptionUtil.verificaCamposUsuarios(usuario);
         return usuarioService.salvar(usuario);}
 
-    @PutMapping
+    @PutMapping(value = "/{id}")
     public Usuario editarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {
         exceptionUtil.verificaCamposUsuarios(usuario);
         return usuarioService.editarUsuario(id,usuario);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void removerUsuario(@PathVariable Long id) {
+    public void removerUsuarioId(@PathVariable Long id) {
         exceptionUtil.verificaUsuarioId(id);
-        usuarioService.removerUsuario(id);}
+        usuarioService.removerUsuarioId(id);
+    }
+
+    @DeleteMapping
+    public void removerUsuario(@RequestBody Usuario usuario) {
+        usuarioService.removerUsuario(usuario);
+    }
 
 }

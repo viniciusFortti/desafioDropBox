@@ -1,4 +1,4 @@
-package desafio.ftp.ftpserver.Controller;
+package desafio.ftp.ftpserver.controller;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PostMapping;

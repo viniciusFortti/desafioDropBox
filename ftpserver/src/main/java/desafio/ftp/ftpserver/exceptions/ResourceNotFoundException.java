@@ -1,4 +1,4 @@
-package desafio.ftp.ftpserver.Exceptions;
+package desafio.ftp.ftpserver.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -1,7 +1,7 @@
-package desafio.ftp.ftpserver.Handler;
+package desafio.ftp.ftpserver.handler;
 
-import desafio.ftp.ftpserver.Exceptions.ResourceNotFoundDetails;
-import desafio.ftp.ftpserver.Exceptions.ResourceNotFoundException;
+import desafio.ftp.ftpserver.exceptions.ResourceNotFoundDetails;
+import desafio.ftp.ftpserver.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

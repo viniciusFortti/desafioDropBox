@@ -1,4 +1,4 @@
-package desafio.ftp.ftpserver.Exceptions;
+package desafio.ftp.ftpserver.exceptions;
 
 public class CustomErrorType {
     private String errorMessage;

@@ -1,11 +1,9 @@
-package desafio.ftp.ftpserver.Service;
+package desafio.ftp.ftpserver.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import desafio.ftp.ftpserver.Model.Usuario;
-import desafio.ftp.ftpserver.Repository.UsuarioRepository;
+import desafio.ftp.ftpserver.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;

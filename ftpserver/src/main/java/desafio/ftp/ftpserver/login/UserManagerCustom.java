@@ -1,10 +1,7 @@
-package desafio.ftp.ftpserver.Login;
+package desafio.ftp.ftpserver.login;
 
-import desafio.ftp.ftpserver.ServerFTP.RunServer;
-import org.apache.ftpserver.usermanager.*;
+import desafio.ftp.ftpserver.serverftp.RunServer;
 import org.apache.ftpserver.ftplet.*;
-import org.apache.ftpserver.ftplet.UserManager;
-
 import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
@@ -30,12 +27,11 @@ public class UserManagerCustom {
             e.printStackTrace();
         }
         umf.setFile(new File("myuser.properties"));
-        umf.setPasswordEncryptor(new ClearTextPasswordEncryptor());
         return umf.createUserManager();
     }
 
 
-    private static void salvaUsuario(String nome, String senha) throws FtpException {
+    public static void salvaUsuario(String nome, String senha) throws FtpException {
         UserManager userManager = criaUserManager();
 
         List<Authority> authorities = new ArrayList<>();

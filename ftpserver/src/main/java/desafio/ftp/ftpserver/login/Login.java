@@ -1,4 +1,4 @@
-package desafio.ftp.ftpserver.Login;
+package desafio.ftp.ftpserver.login;
 
 import org.apache.ftpserver.ftplet.*;
 

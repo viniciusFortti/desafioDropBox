@@ -1,7 +1,7 @@
-package desafio.ftp.ftpserver.Service;
+package desafio.ftp.ftpserver.service;
 
-import desafio.ftp.ftpserver.Model.Usuario;
-import desafio.ftp.ftpserver.Repository.UsuarioRepository;
+import desafio.ftp.ftpserver.model.Usuario;
+import desafio.ftp.ftpserver.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +27,12 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public void removerUsuario( Long id)  {
+    public void removerUsuarioId( Long id)  {
         usuarioRepository.deleteById(id);
+    }
+
+    public void removerUsuario(Usuario usuario)  {
+        usuarioRepository.delete(usuario);
     }
 
     public List<Usuario> listarUsuarios() {
