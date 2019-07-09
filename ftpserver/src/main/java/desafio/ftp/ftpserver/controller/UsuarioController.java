@@ -34,13 +34,16 @@ public class UsuarioController{
         return usuarioService.buscarPorNome(nome);}
 
     @GetMapping(value = "/listar")
-    public List<Usuario> listarUsuarios() {return usuarioService.listarUsuarios();}
+    public List<Usuario> listarUsuarios() {
+        return usuarioService.listarUsuarios();
+    }
 
     @PostMapping
     public Usuario salvar(@RequestBody Usuario usuario) throws FtpException {
         UserManagerCustom.salvaUsuario(usuario.getNome(),usuario.getSenha());
         exceptionUtil.verificaCamposUsuarios(usuario);
-        return usuarioService.salvar(usuario);}
+        return usuarioService.salvar(usuario);
+    }
 
     @PutMapping(value = "/{id}")
     public Usuario editarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {

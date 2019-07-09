@@ -24,7 +24,7 @@ public class ConfigurationServer {
         serverFactory = new FtpServerFactory();
 
         ListenerFactory listenerFactory = new ListenerFactory();
-        listenerFactory.setPort(8081);
+        listenerFactory.setPort(2021);
         listenerFactory.setIdleTimeout(120);
 
         ConnectionConfigFactory connectionConfigFactory = new ConnectionConfigFactory();

@@ -15,8 +15,8 @@ public class ArquivoController {
 
     FTPClient ftpClient;
 
-    @PostMapping(value = "/up")
+    /*@PostMapping(value = "/up")
     public String uploadArquivo(@RequestParam MultipartFile arquivo, User user){
-        
-    }
+
+    }*/
 }
