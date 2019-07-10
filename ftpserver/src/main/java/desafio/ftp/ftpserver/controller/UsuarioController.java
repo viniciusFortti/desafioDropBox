@@ -21,12 +21,12 @@ public class UsuarioController{
     @Autowired
     ExceptionUtil exceptionUtil;
 
-    @GetMapping(value = "/{id}")
+   /* @GetMapping(value = "/{id}")
     public Optional<Usuario> buscarPorId(@PathVariable Long id) {
         exceptionUtil.verificaUsuarioId(id);
         return usuarioService.buscarUsuario(id);
 
-    }
+    }*/
 
     @GetMapping
     public List<Usuario> buscarPorNome(@RequestParam String nome) {

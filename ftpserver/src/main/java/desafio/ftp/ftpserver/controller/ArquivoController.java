@@ -1,22 +1,36 @@
 package desafio.ftp.ftpserver.controller;
 
-import desafio.ftp.ftpserver.login.UserManagerCustom;
+import desafio.ftp.ftpserver.model.Usuario;
+import desafio.ftp.ftpserver.service.UploadService;
+import desafio.ftp.ftpserver.service.UsuarioService;
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.ftpserver.ftplet.FtpException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping(value ="/uploads")
 public class ArquivoController {
 
-    FTPClient ftpClient;
 
-    /*@PostMapping(value = "/up")
-    public String uploadArquivo(@RequestParam MultipartFile arquivo, User user){
+    @Autowired
+    UsuarioService usuarioService ;
 
-    }*/
+    @Autowired
+    UploadService uploadService;
+
+
+    @PostMapping(value = "/{nome}")
+    public String uploadArquivo(@RequestParam("file") MultipartFile arquivo,@PathVariable String nome) throws IOException, FtpException {
+
+        Usuario usuario = usuarioService.buscarUsuario(nome);
+
+        uploadService.upload(arquivo,usuario.getNome(),usuario.getSenha());
+
+        return "arquivo enviado";
+    }
 }

@@ -18,8 +18,8 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Optional<Usuario> buscarUsuario(long id) {
-        return usuarioRepository.findById(id);
+    public Usuario buscarUsuario(String nome) {
+        return usuarioRepository.findByNome(nome);
     }
 
     public Usuario editarUsuario(Long id, Usuario usuario) {

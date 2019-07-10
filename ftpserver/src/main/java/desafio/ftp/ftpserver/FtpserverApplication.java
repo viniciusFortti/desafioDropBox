@@ -1,6 +1,7 @@
 package desafio.ftp.ftpserver;
 
 import desafio.ftp.ftpserver.serverftp.RunServer;
+import org.apache.commons.net.ftp.FTPClient;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +15,4 @@ public class FtpserverApplication {
         SpringApplication.run(FtpserverApplication.class, args);
         RunServer.run();
         }
-
-
-
 }

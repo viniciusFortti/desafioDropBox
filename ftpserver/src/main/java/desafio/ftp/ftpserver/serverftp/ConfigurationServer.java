@@ -9,11 +9,12 @@ import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.ftplet.Ftplet;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Service
 public class ConfigurationServer {
 
 
@@ -25,7 +26,7 @@ public class ConfigurationServer {
 
         ListenerFactory listenerFactory = new ListenerFactory();
         listenerFactory.setPort(2021);
-        listenerFactory.setIdleTimeout(120);
+        listenerFactory.setIdleTimeout(120000000);
 
         ConnectionConfigFactory connectionConfigFactory = new ConnectionConfigFactory();
         connectionConfigFactory.setAnonymousLoginEnabled(false);
@@ -48,7 +49,7 @@ public class ConfigurationServer {
     }
 
     public void stop() {
-        if(!server.isStopped()) {
+        if (!server.isStopped()) {
             server.stop();
             server = null;
         }
