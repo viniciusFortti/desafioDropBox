@@ -18,8 +18,8 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario buscarUsuario(String nome) {
-        return usuarioRepository.findByNome(nome);
+    public Optional<Usuario> buscarUsuario(Long id) {
+        return usuarioRepository.findById(id);
     }
 
     public Usuario editarUsuario(Long id, Usuario usuario) {
@@ -27,7 +27,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public void removerUsuarioId( Long id)  {
+    public void removerUsuarioId(Long id)  {
         usuarioRepository.deleteById(id);
     }
 

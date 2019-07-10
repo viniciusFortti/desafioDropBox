@@ -21,7 +21,7 @@ public class ConfigurationServer {
     private FtpServerFactory serverFactory;
     private FtpServer server;
 
-    public boolean start() {
+    public boolean start(){
         serverFactory = new FtpServerFactory();
 
         ListenerFactory listenerFactory = new ListenerFactory();

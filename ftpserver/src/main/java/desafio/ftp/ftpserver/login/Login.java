@@ -8,13 +8,14 @@ public class Login implements Ftplet {
 
 
     @Override
-    public FtpletResult beforeCommand(FtpSession session, FtpRequest request) throws FtpException, IOException {
+    public FtpletResult beforeCommand(FtpSession session, FtpRequest request){
         String command = request.getCommand();
 
         if ((command.contains("USER") || command.contains("PASS"))) {
             UserManagerCustom.criarNovoUsuario(request,command);
             return FtpletResult.DEFAULT;
-        }return FtpletResult.DEFAULT;
+        }
+        return FtpletResult.DEFAULT;
     }
 
     @Override

@@ -8,7 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-
+//TODO implementar lombok
 @Document(collection = "usuario")
 public class Usuario {
 

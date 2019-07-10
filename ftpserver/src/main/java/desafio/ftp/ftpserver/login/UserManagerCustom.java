@@ -32,7 +32,7 @@ public class UserManagerCustom {
     }
 
 
-    public static void salvaUsuario(String nome, String senha) throws FtpException {
+    public static void salvaUsuario(String nome, String senha) {
         UserManager userManager = criaUserManager();
 
         List<Authority> authorities = new ArrayList<>();
@@ -47,8 +47,8 @@ public class UserManagerCustom {
         try {
             Runtime.getRuntime().exec("mkdir " + user.getHomeDirectory());
             userManager.save(user);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            e.getMessage();
         }
     }
 
@@ -56,16 +56,20 @@ public class UserManagerCustom {
         return System.getProperty("user.dir") + "/servidorFTP/" + nome;
     }
 
-    public static void criarNovoUsuario(FtpRequest request, String command) throws FtpException {
+    public static void criarNovoUsuario(FtpRequest request, String command) {
         if (command.contains("USER")){
             nomeUsuario = request.getArgument();
             novoUsuario = UserManagerCustom.verificaUsuario(nomeUsuario);
         }
         if (command.contains("PASS") && novoUsuario) {
             senhaUsuario = request.getArgument();
-            salvaUsuario(nomeUsuario, senhaUsuario);
-            RunServer.restart();
-            novoUsuario = false;
+            try {
+                salvaUsuario(nomeUsuario, senhaUsuario);
+                RunServer.restart();
+                novoUsuario = false;
+            } catch (FtpException e) {
+                e.getMessage();
+            }
         }
     }
 
