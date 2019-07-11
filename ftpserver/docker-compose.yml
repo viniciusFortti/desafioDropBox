@@ -1,10 +1,24 @@
-  mongo_db:
-    image: mongo
-    container_name: mongo-db
-    volumes:
-      - "./files/db/mongo:/data"
+version: '2'
+
+services:
+  server_web:
+    image: ftpserver/desafioapp6
+    container_name: "webserver"
     ports:
-      - "27017:27017"
-      - "28017:28017"
-    environment:
-      AUTH: "no"
+      - "8080:8080"
+    volumes:
+      - "./build/libs:/usr/src/myapp"
+#        depends_on:
+#      - mongo-db
+
+#  mongo-db:
+#    image: mongo
+#    container_name: mongo-db
+#    volumes:
+#      - "./files/db/mongo:/data"
+#    ports:
+#      - "27017:27017"
+#      - "28017:28017"
+#    environment:
+#      AUTH: "no"
+
