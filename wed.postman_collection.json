@@ -209,77 +209,16 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/usuarios/1",
+					"raw": "http://localhost:8080/v1/usuarios/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"v1",
 						"usuarios",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DESAFIO FTP",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\t\n\t\"id\": 5,\n    \"nome\": \"jose\",\n    \"cpf\": \"5338359367\",\n    \"email\": \"joao@gmail.com\",\n    \"senha\": \"joao\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/usuarios/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DESAFIO FTP",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/usuarios/5",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						"5"
+						"4"
 					]
 				}
 			},
@@ -295,13 +234,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/usuarios/?nome=x",
+					"raw": "http://localhost:8080/v1/usuarios/?nome=x",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"v1",
 						"usuarios",
 						""
 					],
@@ -325,15 +265,195 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/usuarios/listar",
+					"raw": "http://localhost:8080/v1/usuarios/listar",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"v1",
 						"usuarios",
 						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\"id\": 4,\n    \"nome\": \"kleber\",\n    \"cpf\": \"235456743543\",\n    \"email\": \"kleber@gmail.com\",\n    \"senha\": \"kleber\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/usuarios/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"usuarios",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"nome\": \"vinicius\",\n    \"cpf\": \"5338359367\",\n    \"email\": \"vinicius@gmail.com\",\n    \"senha\": \"vinicius\",\n    \"amigos\": [{\"id\": 2,\n        \"nome\": \"vini\",\n        \"cpf\": \"5338359367\",\n        \"email\": \"vini@gmail.com\",\n        \"senha\": \"vini\",\n    \t\"amigos\":[]\n    }]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/usuarios/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"usuarios",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 3,\n        \"nome\": \"ana\",\n        \"cpf\": \"54638359367\",\n        \"email\": \"ana@gmail.com\",\n        \"senha\": \"ana\",\n        \"amigos\": null\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/usuarios/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"usuarios",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP LIST",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/arquivos/3/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"arquivos",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP UP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/arquivos/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"arquivos",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/arquivos/3/kiss.png",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"arquivos",
+						"3",
+						"kiss.png"
 					]
 				}
 			},
