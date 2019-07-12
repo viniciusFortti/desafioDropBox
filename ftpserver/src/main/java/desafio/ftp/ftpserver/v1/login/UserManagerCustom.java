@@ -56,19 +56,15 @@ public class UserManagerCustom {
     }
 
     public static void criarNovoUsuario(FtpRequest request, String command) {
-        if (command.contains("USER")){
+        if (command.contains("USER")) {
             nomeUsuario = request.getArgument();
             novoUsuario = UserManagerCustom.verificaUsuario(nomeUsuario);
         }
         if (command.contains("PASS") && novoUsuario) {
             senhaUsuario = request.getArgument();
-            try {
-                salvaUsuario(nomeUsuario, senhaUsuario);
-                RunServer.restart();
-                novoUsuario = false;
-            } catch (FtpException e) {
-                e.getMessage();
-            }
+            salvaUsuario(nomeUsuario, senhaUsuario);
+            RunServer.restart();
+            novoUsuario = false;
         }
     }
 
@@ -76,7 +72,7 @@ public class UserManagerCustom {
         User usuario = null;
         try {
             usuario = criaUserManager().getUserByName(nome);
-        } catch (FtpException e){
+        } catch (FtpException e) {
             e.getMessage();
         }
         return usuario == null;

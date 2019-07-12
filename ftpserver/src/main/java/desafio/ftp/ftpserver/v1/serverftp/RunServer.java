@@ -1,21 +1,17 @@
 package desafio.ftp.ftpserver.v1.serverftp;
 
-import org.apache.ftpserver.ftplet.FtpException;
-
-import java.io.IOException;
-import java.net.ServerSocket;
-
 public class RunServer {
 
-    private ServerSocket socket;
 
     private static ConfigurationServer serverFtp = new ConfigurationServer();
 
-    public RunServer() throws IOException{this.socket = new ServerSocket(8081);}
+    public RunServer() {
 
-    public static void run() throws FtpException{serverFtp.start();}
+    }
 
-    public static void restart() throws FtpException {serverFtp.stop();serverFtp.start();}
+    public static void run() {serverFtp.start();}
+
+    public static void restart() {serverFtp.stop();serverFtp.start();}
 
 
 }
