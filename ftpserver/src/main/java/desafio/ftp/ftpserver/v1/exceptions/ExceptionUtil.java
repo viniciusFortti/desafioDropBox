@@ -1,7 +1,7 @@
-package desafio.ftp.ftpserver.exceptions;
+package desafio.ftp.ftpserver.v1.exceptions;
 
-import desafio.ftp.ftpserver.model.Usuario;
-import desafio.ftp.ftpserver.repository.UsuarioRepository;
+import desafio.ftp.ftpserver.v1.model.Usuario;
+import desafio.ftp.ftpserver.v1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,6 @@
-package desafio.ftp.ftpserver.model;
+package desafio.ftp.ftpserver.v1.model;
 
 import lombok.Data;
-import lombok.NonNull;
 
 import java.util.List;
 

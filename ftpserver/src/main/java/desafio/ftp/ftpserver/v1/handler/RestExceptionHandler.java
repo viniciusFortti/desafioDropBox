@@ -1,14 +1,13 @@
-package desafio.ftp.ftpserver.handler;
+package desafio.ftp.ftpserver.v1.handler;
 
-import desafio.ftp.ftpserver.exceptions.ResourceNotFoundDetails;
-import desafio.ftp.ftpserver.exceptions.ResourceNotFoundException;
+import desafio.ftp.ftpserver.v1.exceptions.ResourceNotFoundDetails;
+import desafio.ftp.ftpserver.v1.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.io.FileNotFoundException;
 import java.util.Date;
 //TODO entender melhor como funciona exception handler.
 @ControllerAdvice

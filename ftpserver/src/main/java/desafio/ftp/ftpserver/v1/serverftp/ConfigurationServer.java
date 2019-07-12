@@ -1,7 +1,7 @@
-package desafio.ftp.ftpserver.serverftp;
+package desafio.ftp.ftpserver.v1.serverftp;
 
-import desafio.ftp.ftpserver.login.Login;
-import desafio.ftp.ftpserver.login.UserManagerCustom;
+import desafio.ftp.ftpserver.v1.login.Login;
+import desafio.ftp.ftpserver.v1.login.UserManagerCustom;
 
 import org.apache.ftpserver.ConnectionConfigFactory;
 import org.apache.ftpserver.FtpServer;

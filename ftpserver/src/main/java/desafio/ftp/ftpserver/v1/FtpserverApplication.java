@@ -1,17 +1,15 @@
-package desafio.ftp.ftpserver;
+package desafio.ftp.ftpserver.v1;
 
-import desafio.ftp.ftpserver.serverftp.RunServer;
-import org.apache.commons.net.ftp.FTPClient;
+import desafio.ftp.ftpserver.v1.serverftp.RunServer;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
 
 @SpringBootApplication
 public class FtpserverApplication {
 
-    public static void main(String[] args) throws FtpException, IOException {
+    public static void main(String[] args) throws FtpException {
         SpringApplication.run(FtpserverApplication.class, args);
         RunServer.run();
         }

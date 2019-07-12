@@ -1,9 +1,9 @@
-package desafio.ftp.ftpserver.controller;
+package desafio.ftp.ftpserver.v1.controller;
 
-import desafio.ftp.ftpserver.exceptions.ExceptionUtil;
-import desafio.ftp.ftpserver.login.UserManagerCustom;
-import desafio.ftp.ftpserver.model.Usuario;
-import desafio.ftp.ftpserver.service.UsuarioService;
+import desafio.ftp.ftpserver.v1.login.UserManagerCustom;
+import desafio.ftp.ftpserver.v1.model.Usuario;
+import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
+import desafio.ftp.ftpserver.v1.service.UsuarioService;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/v1/usuarios")
 public class UsuarioController{
 
     @Autowired

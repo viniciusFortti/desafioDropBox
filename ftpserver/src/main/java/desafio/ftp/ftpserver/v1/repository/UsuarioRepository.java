@@ -1,6 +1,6 @@
-package desafio.ftp.ftpserver.repository;
+package desafio.ftp.ftpserver.v1.repository;
 
-import desafio.ftp.ftpserver.model.Usuario;
+import desafio.ftp.ftpserver.v1.model.Usuario;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

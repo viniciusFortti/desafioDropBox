@@ -1,4 +1,4 @@
-package desafio.ftp.ftpserver.serverftp;
+package desafio.ftp.ftpserver.v1.serverftp;
 
 import org.apache.ftpserver.ftplet.FtpException;
 

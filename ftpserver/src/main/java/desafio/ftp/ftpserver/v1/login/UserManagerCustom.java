@@ -1,7 +1,6 @@
-package desafio.ftp.ftpserver.login;
+package desafio.ftp.ftpserver.v1.login;
 
-import desafio.ftp.ftpserver.model.Usuario;
-import desafio.ftp.ftpserver.serverftp.RunServer;
+import desafio.ftp.ftpserver.v1.serverftp.RunServer;
 import org.apache.ftpserver.ftplet.*;
 import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
