@@ -5,6 +5,7 @@ import desafio.ftp.ftpserver.v1.service.UsuarioService;
 import desafio.ftp.ftpserver.v1.model.Usuario;
 import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,5 +56,24 @@ public class ArquivoController {
         } catch (IOException e) {
             e.getMessage();
         }return null;
+    }
+
+    @GetMapping(value = "/{id}/{nome}")
+    public void download(@PathVariable Long id, @PathVariable String nome) throws IOException {
+        Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
+        arquivoService.download(usuario.get().getNome(),usuario.get().getSenha(),nome);
+
+    }
+
+
+    @GetMapping(value = "/paginados/{id}/{paginas}/{quantidade}")
+    public ResponseEntity<Page<FTPFile>> listarArquivosPaginados(@PathVariable(value = "id") Long id,
+                                                                 @PathVariable(value = "paginas") Integer pagina,
+                                                                 @PathVariable(value = "quantidade") Integer quantidade) {
+        Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
+
+        return new ResponseEntity<>(this.arquivoService.listarPaginado(
+                pagina,quantidade,usuario.get().getNome(),usuario.get().getSenha()),HttpStatus.OK);
+
     }
 }

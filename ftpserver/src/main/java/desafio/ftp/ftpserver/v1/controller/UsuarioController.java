@@ -62,4 +62,10 @@ public class UsuarioController{
         usuarioService.removerUsuario(usuario);
     }
 
+    @PutMapping(value = "/{id}/{idAmigo}")
+    public void adcAmigos(@PathVariable Long id, @PathVariable Long idAmigo){
+        //return usuarioService.adcUsuario(id,idAmigo);
+
+    }
+
 }

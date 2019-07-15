@@ -3,6 +3,7 @@ package desafio.ftp.ftpserver.v1.model;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Data

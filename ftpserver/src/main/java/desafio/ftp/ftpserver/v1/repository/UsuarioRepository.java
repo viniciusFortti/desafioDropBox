@@ -10,6 +10,9 @@ import java.util.List;
 public interface UsuarioRepository extends MongoRepository<Usuario,Long> {
 
     List<Usuario> findByNomeContainingIgnoreCase(String nome);
+
+
+
     Usuario findByNome(String nome);
 
 

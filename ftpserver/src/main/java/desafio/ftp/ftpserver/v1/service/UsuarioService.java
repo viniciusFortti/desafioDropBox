@@ -39,9 +39,6 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public List<Usuario> buscarPorNome(String nome){
-        return usuarioRepository.findByNomeContainingIgnoreCase(nome);
-
-    }
+    public List<Usuario> buscarPorNome(String nome){ return usuarioRepository.findByNomeContainingIgnoreCase(nome);}
 
 }
