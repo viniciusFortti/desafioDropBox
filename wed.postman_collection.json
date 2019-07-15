@@ -209,7 +209,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/4",
+					"raw": "http://localhost:8080/v1/usuarios/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -218,7 +218,7 @@
 					"path": [
 						"v1",
 						"usuarios",
-						"4"
+						"3"
 					]
 				}
 			},
@@ -294,7 +294,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\"id\": 4,\n    \"nome\": \"kleber\",\n    \"cpf\": \"235456743543\",\n    \"email\": \"kleber@gmail.com\",\n    \"senha\": \"kleber\"\n}"
+					"raw": "{\t\"id\": 4,\n    \"nome\": \"kleber\",\n    \"cpf\": \"235456743543\",\n    \"email\": \"klebe\tr@gmail.com\",\n    \"senha\": \"kleber\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/v1/usuarios/",
@@ -358,7 +358,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"id\": 3,\n        \"nome\": \"ana\",\n        \"cpf\": \"54638359367\",\n        \"email\": \"ana@gmail.com\",\n        \"senha\": \"ana\",\n        \"amigos\": null\n    }"
+					"raw": ""
 				},
 				"url": {
 					"raw": "http://localhost:8080/v1/usuarios/4",
@@ -418,7 +418,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/3",
+					"raw": "http://localhost:8080/v1/arquivos/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -427,7 +427,7 @@
 					"path": [
 						"v1",
 						"arquivos",
-						"3"
+						"4"
 					]
 				}
 			},
@@ -454,6 +454,86 @@
 						"arquivos",
 						"3",
 						"kiss.png"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP LISTAGEM PAGINADA",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/arquivos/paginados/3/0/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"arquivos",
+						"paginados",
+						"3",
+						"0",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP DOWN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/arquivos/3/semaphore.png",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"arquivos",
+						"3",
+						"semaphore.png"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP COMP AMIGO",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/usuarios/1/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"usuarios",
+						"1",
+						"4"
 					]
 				}
 			},
