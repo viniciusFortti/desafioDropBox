@@ -4,7 +4,7 @@ Servidor FTP
 Funcionalidades
 1 - Criar um crud de usuário.
 2 - Permitir upload de arquivos de usuarios.
-3 - X Listar todos upload de arquivo do usuario (Paginados e com filtros).
+3 - Listar todos upload de arquivo do usuario (Paginados e com filtros).
 4 - Excluir os arquivos do usuario.
 5 - X Compartilhar os arquivos entre diferentes usuários.
 6 - X Documentação da API.
