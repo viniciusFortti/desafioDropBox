@@ -209,7 +209,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/3",
+					"raw": "http://localhost:8080/v1/usuarios/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -218,7 +218,7 @@
 					"path": [
 						"v1",
 						"usuarios",
-						"3"
+						"4"
 					]
 				}
 			},
@@ -294,7 +294,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\"id\": 4,\n    \"nome\": \"kleber\",\n    \"cpf\": \"235456743543\",\n    \"email\": \"klebe\tr@gmail.com\",\n    \"senha\": \"kleber\"\n}"
+					"raw": "{\n        \"id\": 2,\n        \"nome\": \"vanessa\",\n        \"cpf\": \"235456743543\",\n        \"email\": \"vanessa@gmail.com\",\n        \"senha\": \"vanessa\",\n        \"amigos\": []\n    }"
 				},
 				"url": {
 					"raw": "http://localhost:8080/v1/usuarios/",
@@ -361,7 +361,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/4",
+					"raw": "http://localhost:8080/v1/usuarios/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -370,7 +370,7 @@
 					"path": [
 						"v1",
 						"usuarios",
-						"4"
+						"2"
 					]
 				}
 			},
@@ -386,7 +386,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/3/",
+					"raw": "http://localhost:8080/v1/arquivos/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -395,8 +395,7 @@
 					"path": [
 						"v1",
 						"arquivos",
-						"3",
-						""
+						"1"
 					]
 				}
 			},
@@ -418,7 +417,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/4",
+					"raw": "http://localhost:8080/v1/arquivos/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -427,7 +426,7 @@
 					"path": [
 						"v1",
 						"arquivos",
-						"4"
+						"1"
 					]
 				}
 			},
@@ -443,7 +442,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/3/kiss.png",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/3/arquivo/kiss.png",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -452,7 +451,9 @@
 					"path": [
 						"v1",
 						"arquivos",
+						"usuario",
 						"3",
+						"arquivo",
 						"kiss.png"
 					]
 				}
@@ -469,7 +470,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/paginados/3/0/3",
+					"raw": "http://localhost:8080/v1/arquivos//usuario/3/paginas/0/arquivos/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -478,9 +479,12 @@
 					"path": [
 						"v1",
 						"arquivos",
-						"paginados",
+						"",
+						"usuario",
 						"3",
+						"paginas",
 						"0",
+						"arquivos",
 						"3"
 					]
 				}
@@ -497,7 +501,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/3/semaphore.png",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/3/arquivo/semaphore.png",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -506,7 +510,9 @@
 					"path": [
 						"v1",
 						"arquivos",
+						"usuario",
 						"3",
+						"arquivo",
 						"semaphore.png"
 					]
 				}
@@ -523,7 +529,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/1/4",
+					"raw": "http://localhost:8080/v1/usuarios/usuario/2/amigo/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -532,8 +538,66 @@
 					"path": [
 						"v1",
 						"usuarios",
+						"usuario",
+						"2",
+						"amigo",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP COMP LIST AMIGO",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/arquivos/amigo/1/usuario/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"arquivos",
+						"amigo",
 						"1",
-						"4"
+						"usuario",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP DESFAZER AMIZADE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/usuarios/usuario/4/amigo/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"usuarios",
+						"usuario",
+						"4",
+						"amigo",
+						"1"
 					]
 				}
 			},
