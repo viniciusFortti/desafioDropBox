@@ -25,27 +25,45 @@ public class ArquivoService {
     @Autowired
     ServiceUtil serviceUtil;
 
-    public boolean enviar(MultipartFile arquivo, String nome, String senha) throws IOException {
+    public boolean enviar(MultipartFile arquivo, String nome, String senha){
         FTPClient con = ServiceUtil.conexao(nome, senha);
-        return con.storeFile(arquivo.getOriginalFilename(), arquivo.getInputStream());
+        try {
+            return con.storeFile(arquivo.getOriginalFilename(), arquivo.getInputStream());
+        } catch (IOException e) {
+            e.getMessage();
+            return false;
+        }
     }
 
 
-    public Boolean deletar(String nomeArquivo, String nome, String senha) throws IOException {
+    public Boolean deletar(String nomeArquivo, String nome, String senha)  {
         FTPClient con = ServiceUtil.conexao(nome, senha);
-        return con.deleteFile(nomeArquivo);
+        try {
+            return con.deleteFile(nomeArquivo);
+        } catch (IOException e) {
+            e.getMessage();
+            return false;
+        }
     }
 
-    public FTPFile[] listar(String nome, String senha) throws IOException {
+    public FTPFile[] listar(String nome, String senha)  {
         FTPClient con = ServiceUtil.conexao(nome, senha);
-        return con.listFiles();
-
+        try {
+            return con.listFiles();
+        } catch (IOException e) {
+            e.getMessage();
+            return null;
+        }
     }
 
-    public void download(String nome, String senha, String nomeArquivo) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream("/home/technocorp/Downloads/" + nomeArquivo);
+    public void download(String nome, String senha, String nomeArquivo)  {
         FTPClient con = ServiceUtil.conexao(nome, senha);
-        con.retrieveFile(nomeArquivo, fileOutputStream);
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("/home/technocorp/Downloads/" + nomeArquivo);
+            con.retrieveFile(nomeArquivo, fileOutputStream);
+        } catch (IOException e) {
+            e.getMessage();
+        }
     }
 
 
@@ -65,15 +83,11 @@ public class ArquivoService {
     public FTPFile[] compartilharArquivos(Long idAmigo, Long id) {
 
             if (serviceUtil.verificaAmigo(idAmigo,id)){
-            try {
                 Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
 
                 return listar(usuario.get().getNome(), usuario.get().getSenha());
 
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
         return null;
     }
 }

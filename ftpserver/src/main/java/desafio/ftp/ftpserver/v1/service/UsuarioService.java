@@ -22,10 +22,7 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
-    public Usuario editarUsuario(Long id, Usuario usuario) {
-        usuario.setId(id);
-        return usuarioRepository.save(usuario);
-    }
+    public Usuario editarUsuario(Long id, Usuario usuario) { usuario.setId(id);return usuarioRepository.save(usuario);}
 
     public void removerUsuarioId(Long id)  {
         usuarioRepository.deleteById(id);
@@ -44,12 +41,10 @@ public class UsuarioService {
     public Usuario adicionarAmigo(Long id,Long idAmigo){
 
         Optional<Usuario> usuarioAuxiliar = buscarUsuario(id);
-        Optional<Usuario> amigoAuxiliar = buscarUsuario(idAmigo);
 
         Usuario usuario = usuarioAuxiliar.get();
-        Usuario amigo = amigoAuxiliar.get();
 
-        usuario.getAmigos().add(amigo.getId());
+        usuario.getAmigos().add(idAmigo);
 
         return salvar(usuario);
 
@@ -58,12 +53,12 @@ public class UsuarioService {
     public Usuario deletarAmigo(Long id,Long idAmigo) {
 
         Optional<Usuario> usuarioAuxiliar = buscarUsuario(id);
-        Optional<Usuario> amigoAuxiliar = buscarUsuario(idAmigo);
+
 
         Usuario usuario = usuarioAuxiliar.get();
-        Usuario amigo = amigoAuxiliar.get();
-        if (usuario.getAmigos().contains(amigo)){
-        usuario.getAmigos().remove(amigo);
+
+        if (usuario.getAmigos().contains(idAmigo)){
+        usuario.getAmigos().remove(idAmigo);
         }
 
         return salvar(usuario);

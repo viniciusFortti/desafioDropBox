@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -27,7 +26,7 @@ public class ArquivoController {
 
     @PostMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity uploadArquivo(@RequestParam("file") MultipartFile arquivo, @PathVariable Long id) throws IOException {
+    public ResponseEntity uploadArquivo(@RequestParam("file") MultipartFile arquivo, @PathVariable Long id){
         Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
 
         if(arquivo != null && id > 0) {
@@ -37,36 +36,30 @@ public class ArquivoController {
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping(value = "/{id}/{nome}")
+    @DeleteMapping(value = "usuario/{id}/arquivo/{nome}")
     @ResponseStatus(HttpStatus.OK)
     public Boolean deletaArquivo(@PathVariable Long id,@PathVariable String nome){
         Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
-        try {
-            arquivoService.deletar(nome,usuario.get().getNome(),usuario.get().getSenha());
-        } catch (IOException e) {
-            e.getMessage();
-        } return false;
+
+            return arquivoService.deletar(nome,usuario.get().getNome(),usuario.get().getSenha());
     }
 
     @GetMapping(value = "{id}")
     public FTPFile[] listaTodosArquivos(@PathVariable Long id){
         Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
-        try {
+
             return arquivoService.listar(usuario.get().getNome(),usuario.get().getSenha());
-        } catch (IOException e) {
-            e.getMessage();
-        }return null;
     }
 
-    @GetMapping(value = "/{id}/{nome}")
-    public void download(@PathVariable Long id, @PathVariable String nome) throws IOException {
+    @GetMapping(value = "usuario/{id}/arquivo/{nome}")
+    public void download(@PathVariable Long id, @PathVariable String nome){
         Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
         arquivoService.download(usuario.get().getNome(),usuario.get().getSenha(),nome);
 
     }
 
 
-    @GetMapping(value = "/paginados/{id}/{paginas}/{quantidade}")
+    @GetMapping(value = "/usuario/{id}/paginas/{paginas}/arquivos/{quantidade}")
     public ResponseEntity<Page<FTPFile>> listarArquivosPaginados(@PathVariable(value = "id") Long id,
                                                                  @PathVariable(value = "paginas") Integer pagina,
                                                                  @PathVariable(value = "quantidade") Integer quantidade) {
