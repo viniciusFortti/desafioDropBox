@@ -41,4 +41,17 @@ public class UsuarioService {
 
     public List<Usuario> buscarPorNome(String nome){ return usuarioRepository.findByNomeContainingIgnoreCase(nome);}
 
+    public Usuario adicionarAmigo(Long id,Long idAmigo){
+
+        Optional<Usuario> usuarioAuxiliar = buscarUsuario(id);
+        Optional<Usuario> amigoAuxiliar = buscarUsuario(idAmigo);
+
+        Usuario user = usuarioAuxiliar.get();
+        Usuario friend = amigoAuxiliar.get();
+
+        user.getAmigos().add(friend);
+
+        return salvar(user);
+    }
+
 }

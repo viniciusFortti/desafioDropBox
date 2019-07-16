@@ -1,6 +1,5 @@
 package desafio.ftp.ftpserver.v1.service;
 
-
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +40,6 @@ public class ArquivoService {
         con.retrieveFile(nome, fileOutputStream);
     }
 
-    public void compartilhar(String usuario, String senha){
-        FTPClient con = ServiceUtil.conexao(usuario,senha);
-
-    }
 
     public Page<FTPFile> listarPaginado(int pagina, int quantidade, String usuario, String senha){
 

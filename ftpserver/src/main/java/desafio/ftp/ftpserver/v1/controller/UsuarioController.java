@@ -63,9 +63,9 @@ public class UsuarioController{
     }
 
     @PutMapping(value = "/{id}/{idAmigo}")
-    public void adcAmigos(@PathVariable Long id, @PathVariable Long idAmigo){
-        //return usuarioService.adcUsuario(id,idAmigo);
-
+    public Usuario adicionarAmigo(@PathVariable Long id, @PathVariable Long idAmigo){
+        return usuarioService.adicionarAmigo(id,idAmigo);
     }
+
 
 }
