@@ -1,5 +1,6 @@
 package desafio.ftp.ftpserver.v1.service;
 
+import desafio.ftp.ftpserver.v1.model.Usuario;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -57,12 +62,14 @@ public class ArquivoService {
         }
     }
 
-    public FTPFile[] compartilharArquivos(String nome, String senha, Long id, Long idAmigo) {
-        FTPClient con = ServiceUtil.conexao(nome, senha);
+    public FTPFile[] compartilharArquivos(Long idAmigo, Long id) {
 
-            if (serviceUtil.verificaAmigo(id,idAmigo)){
+            if (serviceUtil.verificaAmigo(idAmigo,id)){
             try {
-                return con.listFiles();
+                Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
+
+                return listar(usuario.get().getNome(), usuario.get().getSenha());
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

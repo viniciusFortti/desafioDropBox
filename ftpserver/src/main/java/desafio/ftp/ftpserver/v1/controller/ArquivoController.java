@@ -77,11 +77,10 @@ public class ArquivoController {
 
     }
 
-    @GetMapping(value = "compartilhar/{id}/{idAmigo}")
-    public FTPFile[] listarArquivosAmigo(@PathVariable Long id, @PathVariable Long idAmigo){
-        Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
+    @GetMapping(value = "amigo/{idAmigo}/usuario/{id}")
+    public FTPFile[] listarArquivosAmigo(@PathVariable Long idAmigo, @PathVariable Long id){
 
-        return arquivoService.compartilharArquivos(usuario.get().getNome(),usuario.get().getSenha(),id,idAmigo);
+        return arquivoService.compartilharArquivos(idAmigo,id);
 
     }
 

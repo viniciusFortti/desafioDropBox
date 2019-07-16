@@ -5,6 +5,7 @@ import desafio.ftp.ftpserver.v1.model.Usuario;
 import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
 import desafio.ftp.ftpserver.v1.service.UsuarioService;
 import org.apache.ftpserver.ftplet.FtpException;
+import org.bson.codecs.UuidCodec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +66,12 @@ public class UsuarioController{
     @PutMapping(value = "/{id}/{idAmigo}")
     public Usuario adicionarAmigo(@PathVariable Long id, @PathVariable Long idAmigo){
         return usuarioService.adicionarAmigo(id,idAmigo);
+    }
+
+    @PostMapping(value = "/{id}/{idAmigo}")
+    public Usuario deletarAmigo(@PathVariable Long id, @PathVariable Long idAmigo){
+        return usuarioService.deletarAmigo(id,idAmigo);
+
     }
 
 

@@ -46,12 +46,28 @@ public class UsuarioService {
         Optional<Usuario> usuarioAuxiliar = buscarUsuario(id);
         Optional<Usuario> amigoAuxiliar = buscarUsuario(idAmigo);
 
-        Usuario user = usuarioAuxiliar.get();
-        Usuario friend = amigoAuxiliar.get();
+        Usuario usuario = usuarioAuxiliar.get();
+        Usuario amigo = amigoAuxiliar.get();
 
-        user.getAmigos().add(friend);
+        usuario.getAmigos().add(amigo.getId());
 
-        return salvar(user);
+        return salvar(usuario);
+
+    }
+
+    public Usuario deletarAmigo(Long id,Long idAmigo) {
+
+        Optional<Usuario> usuarioAuxiliar = buscarUsuario(id);
+        Optional<Usuario> amigoAuxiliar = buscarUsuario(idAmigo);
+
+        Usuario usuario = usuarioAuxiliar.get();
+        Usuario amigo = amigoAuxiliar.get();
+        if (usuario.getAmigos().contains(amigo)){
+        usuario.getAmigos().remove(amigo);
+        }
+
+        return salvar(usuario);
+
     }
 
 }

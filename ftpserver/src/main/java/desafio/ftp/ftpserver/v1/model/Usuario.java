@@ -1,20 +1,23 @@
 package desafio.ftp.ftpserver.v1.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Data
 public class Usuario {
 
+    @Id
     private Long id;
     private String nome;
     private String cpf;
     private String email;
     private String senha;
-    private List<Usuario> amigos;
+    private List<Long> amigos;
 
 
 }

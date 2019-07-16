@@ -46,16 +46,17 @@ public class ServiceUtil {
         return paginaArquivos;
     }
 
-    public boolean verificaAmigo(Long id, Long idAmigo) {
-        Optional<Usuario> usuarioAuxiliar = usuarioService.buscarUsuario(id);
-        Usuario usuario = usuarioAuxiliar.get();
-
+    public boolean verificaAmigo(Long idAmigo, Long id) {
         Optional<Usuario> amigoAuxiliar = usuarioService.buscarUsuario(idAmigo);
         Usuario amigo = amigoAuxiliar.get();
 
-        if (usuario.getAmigos().contains(amigo))
+        Optional<Usuario> usuarioAuxiliar = usuarioService.buscarUsuario(id);
+        Usuario usuario = usuarioAuxiliar.get();
+
+        if (usuario.getAmigos().contains(amigo.getId())) {
             return true;
-        else return false;
+        }
+        else{return false;}
 
     }
 }
