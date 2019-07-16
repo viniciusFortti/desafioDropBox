@@ -10,49 +10,65 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+
 @Service
 public class ArquivoService {
 
     @Autowired
     UsuarioService usuarioService;
 
+    @Autowired
+    ServiceUtil serviceUtil;
 
-    public boolean enviar(MultipartFile arquivo, String usuario, String senha) throws IOException {
-        FTPClient con = ServiceUtil.conexao(usuario,senha);
+    public boolean enviar(MultipartFile arquivo, String nome, String senha) throws IOException {
+        FTPClient con = ServiceUtil.conexao(nome, senha);
         return con.storeFile(arquivo.getOriginalFilename(), arquivo.getInputStream());
-        }
+    }
 
 
-    public Boolean deletar(String nomeArquivo,String usuario, String senha) throws IOException {
-        FTPClient con = ServiceUtil.conexao(usuario,senha);
+    public Boolean deletar(String nomeArquivo, String nome, String senha) throws IOException {
+        FTPClient con = ServiceUtil.conexao(nome, senha);
         return con.deleteFile(nomeArquivo);
     }
 
-    public FTPFile[] listar(String usuario, String senha) throws IOException {
-        FTPClient con = ServiceUtil.conexao(usuario,senha);
+    public FTPFile[] listar(String nome, String senha) throws IOException {
+        FTPClient con = ServiceUtil.conexao(nome, senha);
         return con.listFiles();
 
     }
 
-    public void download(String usuario, String senha, String nome) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream("/home/technocorp/Downloads/"+nome);
-        FTPClient con = ServiceUtil.conexao(usuario,senha);
-        con.retrieveFile(nome, fileOutputStream);
+    public void download(String nome, String senha, String nomeArquivo) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream("/home/technocorp/Downloads/" + nomeArquivo);
+        FTPClient con = ServiceUtil.conexao(nome, senha);
+        con.retrieveFile(nomeArquivo, fileOutputStream);
     }
 
 
-    public Page<FTPFile> listarPaginado(int pagina, int quantidade, String usuario, String senha){
+    public Page<FTPFile> listarPaginado(int pagina, int quantidade, String nome, String senha) {
 
-        FTPClient con = ServiceUtil.conexao(usuario,senha);
+        FTPClient con = ServiceUtil.conexao(nome, senha);
 
         try {
-            return ServiceUtil.paginacao(con.listFiles(),pagina,quantidade);
+            return ServiceUtil.paginacao(con.listFiles(), pagina, quantidade);
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.getMessage();
-            return  null;
+            return null;
         }
     }
 
+    public FTPFile[] compartilharArquivos(String nome, String senha, Long id, Long idAmigo) {
+        FTPClient con = ServiceUtil.conexao(nome, senha);
 
+            if (serviceUtil.verificaAmigo(id,idAmigo)){
+            try {
+                return con.listFiles();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 }
+
+
