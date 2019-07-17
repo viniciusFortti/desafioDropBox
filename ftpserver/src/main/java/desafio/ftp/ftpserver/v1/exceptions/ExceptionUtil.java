@@ -4,6 +4,7 @@ import desafio.ftp.ftpserver.v1.model.Usuario;
 import desafio.ftp.ftpserver.v1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class ExceptionUtil {
@@ -33,6 +34,12 @@ public class ExceptionUtil {
 
         if(nomeUsuario || cpfUsuario || emailUsuario ||senhaUsuario ){
             throw new ResourceNotFoundException("Campo de usuario nulo, verifique sua requisição");
+        }
+    }
+
+    public void extensaoArquivoInexistente( String nome) {
+        if (!nome.contains(".")) {
+            throw new MultiPartException("arquivo sem sua respectiva extensão verifique sua solicitação.");
         }
     }
 }

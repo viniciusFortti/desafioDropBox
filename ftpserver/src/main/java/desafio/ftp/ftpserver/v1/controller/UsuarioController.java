@@ -2,14 +2,14 @@ package desafio.ftp.ftpserver.v1.controller;
 
 import desafio.ftp.ftpserver.v1.login.UserManagerCustom;
 import desafio.ftp.ftpserver.v1.model.Usuario;
-import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
 import desafio.ftp.ftpserver.v1.service.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.apache.ftpserver.ftplet.FtpException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +23,6 @@ public class UsuarioController{
     @Autowired
     UsuarioService usuarioService;
 
-    @Autowired
-    ExceptionUtil exceptionUtil;
 
     @ApiOperation(value = "Busca o usuario recebendo apenas seu ID")
     @ApiResponses(value= {
@@ -35,7 +33,6 @@ public class UsuarioController{
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "/{id}")
     public Optional<Usuario> buscarPorId(@PathVariable Long id) {
-        exceptionUtil.verificaUsuarioId(id);
         return usuarioService.buscarUsuario(id);
 
     }
@@ -49,7 +46,6 @@ public class UsuarioController{
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping
     public List<Usuario> buscarPorNome(@RequestParam String nome) {
-        exceptionUtil.verificaUsuarioNome(nome);
         return usuarioService.buscarPorNome(nome);}
 
     @ApiOperation(value = "Lista todos usuarios")
@@ -73,7 +69,6 @@ public class UsuarioController{
     @PostMapping
     public Usuario salvar(@RequestBody Usuario usuario){
         UserManagerCustom.salvaUsuario(usuario.getNome(),usuario.getSenha());
-        exceptionUtil.verificaCamposUsuarios(usuario);
         return usuarioService.salvar(usuario);
     }
 
@@ -86,7 +81,6 @@ public class UsuarioController{
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @PutMapping(value = "/{id}")
     public Usuario editarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {
-        exceptionUtil.verificaCamposUsuarios(usuario);
         return usuarioService.editarUsuario(id,usuario);
     }
 
@@ -98,9 +92,9 @@ public class UsuarioController{
             @ApiResponse(code = 404, message = "Usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @DeleteMapping(value = "/{id}")
-    public void removerUsuarioId(@PathVariable Long id) {
-        exceptionUtil.verificaUsuarioId(id);
+    public ResponseEntity removerUsuarioId(@PathVariable Long id) {
         usuarioService.removerUsuarioId(id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Deleta usuario recebendo todos seus dados")
@@ -111,8 +105,9 @@ public class UsuarioController{
             @ApiResponse(code = 404, message = "Usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @DeleteMapping
-    public void removerUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity removerUsuario(@RequestBody Usuario usuario) {
         usuarioService.removerUsuario(usuario);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Adiciona um amigo ao usuario, recebendo os ID's")

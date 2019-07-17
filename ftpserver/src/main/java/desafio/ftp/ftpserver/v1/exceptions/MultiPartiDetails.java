@@ -1,7 +1,7 @@
 package desafio.ftp.ftpserver.v1.exceptions;
 
 
-public class ResourceNotFoundDetails extends ErrorDetails {
+public class MultiPartiDetails extends ErrorDetails {
 
     public static final class Builder {
         private String title;
@@ -42,14 +42,14 @@ public class ResourceNotFoundDetails extends ErrorDetails {
             return this;
         }
 
-        public ResourceNotFoundDetails build() {
-            ResourceNotFoundDetails resourceNotFoundDetails = new ResourceNotFoundDetails();
-            resourceNotFoundDetails.setDeveloperMessage(developerMessage);
-            resourceNotFoundDetails.setTitle(title);
-            resourceNotFoundDetails.setDetail(detail);
-            resourceNotFoundDetails.setTimestamp(timestamp);
-            resourceNotFoundDetails.setStatus(status);
-            return resourceNotFoundDetails;
+        public MultiPartiDetails build() {
+            MultiPartiDetails multiPartiDetails = new MultiPartiDetails();
+            multiPartiDetails.setDeveloperMessage(developerMessage);
+            multiPartiDetails.setTitle(title);
+            multiPartiDetails.setDetail(detail);
+            multiPartiDetails.setTimestamp(timestamp);
+            multiPartiDetails.setStatus(status);
+            return multiPartiDetails;
         }
     }
 }

@@ -39,9 +39,9 @@ public class ServiceUtil {
         for (FTPFile arquivo : arquivos) {
             listaArquivos.add(arquivo);
         }
-        int maximoArquivos = (quantidade * (pagina + 1) > listaArquivos.size()) ? listaArquivos.size() : quantidade * (pagina + 1);
+        int maximoArquivos = ((quantidade*pagina)  > listaArquivos.size()) ? listaArquivos.size() : quantidade * (pagina);
 
-        Page<FTPFile> paginaArquivos = new PageImpl<>(listaArquivos.subList(pagina * quantidade, maximoArquivos), PageRequest.of(pagina, quantidade), maximoArquivos);
+        Page<FTPFile> paginaArquivos = new PageImpl<>(listaArquivos.subList((pagina - 1) * quantidade, maximoArquivos), PageRequest.of(pagina, quantidade), maximoArquivos);
 
         return paginaArquivos;
     }

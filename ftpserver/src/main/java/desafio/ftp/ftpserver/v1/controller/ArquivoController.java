@@ -29,6 +29,8 @@ public class ArquivoController {
     @Autowired
     ArquivoService arquivoService;
 
+
+
     @ApiOperation(value = "Salva o arquivo no servidor ftp")
     @ApiResponses(value= {
             @ApiResponse(code = 200,message= "Ok, arquivo enviado com sucesso."),
@@ -39,10 +41,10 @@ public class ArquivoController {
     @PostMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity uploadArquivo(@RequestParam("file") MultipartFile arquivo, @PathVariable Long id){
-        Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
-
+        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+        Usuario usuario = usuarioAux.get();
         if(arquivo != null && id > 0) {
-            arquivoService.enviar(arquivo, usuario.get().getNome(), usuario.get().getSenha());
+            arquivoService.enviar(arquivo,usuario);
             return new ResponseEntity<>(null, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -57,10 +59,11 @@ public class ArquivoController {
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @DeleteMapping(value = "usuario/{id}/arquivo/{nome}")
     @ResponseStatus(HttpStatus.OK)
-    public Boolean deletaArquivo(@PathVariable Long id,@PathVariable String nome){
-        Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
-
-        return arquivoService.deletar(nome,usuario.get().getNome(),usuario.get().getSenha());
+    public ResponseEntity deletaArquivo(@PathVariable Long id,@PathVariable String nome){
+        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+        Usuario usuario = usuarioAux.get();
+        arquivoService.deletar(nome,usuario);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Lista todos os arquivo que estão no servidor ftp")
@@ -72,9 +75,9 @@ public class ArquivoController {
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "{id}")
     public FTPFile[] listaTodosArquivos(@PathVariable Long id){
-        Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
-
-            return arquivoService.listar(usuario.get().getNome(),usuario.get().getSenha());
+        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+        Usuario usuario = usuarioAux.get();
+        return arquivoService.listar(usuario);
     }
 
     @ApiOperation(value = "Baixa o arquivo do servidor ftp para maquina local")
@@ -85,10 +88,11 @@ public class ArquivoController {
             @ApiResponse(code = 404, message = "Arquivo ou usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "usuario/{id}/arquivo/{nome}")
-    public void download(@PathVariable Long id, @PathVariable String nome){
-        Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
-        arquivoService.download(usuario.get().getNome(),usuario.get().getSenha(),nome);
-
+    public ResponseEntity download(@PathVariable Long id, @PathVariable String nome){
+        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+        Usuario usuario = usuarioAux.get();
+        arquivoService.download(usuario,nome);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Lista todos os arquivos paginados")
@@ -102,10 +106,10 @@ public class ArquivoController {
     public ResponseEntity<Page<FTPFile>> listarArquivosPaginados(@PathVariable(value = "id") Long id,
                                                                  @PathVariable(value = "paginas") Integer pagina,
                                                                  @PathVariable(value = "quantidade") Integer quantidade) {
-        Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
-
+        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+        Usuario usuario = usuarioAux.get();
         return new ResponseEntity<>(this.arquivoService.listarPaginado(
-                pagina,quantidade,usuario.get().getNome(),usuario.get().getSenha()),HttpStatus.OK);
+                pagina,quantidade,usuario),HttpStatus.OK);
 
     }
 
@@ -118,7 +122,6 @@ public class ArquivoController {
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "amigo/{idAmigo}/usuario/{id}")
     public FTPFile[] listarArquivosAmigo(@PathVariable Long idAmigo, @PathVariable Long id){
-
         return arquivoService.compartilharArquivos(idAmigo,id);
 
     }
