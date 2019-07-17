@@ -6,17 +6,11 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8080/api/usuario/registrar",
+			"name": "DESAFIO FTP SALVA USUARIO",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
-						"key": "",
-						"value": "",
-						"type": "text",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
 						"name": "Content-Type",
 						"value": "application/json",
@@ -25,191 +19,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nome\": \"Vinicius\",\n    \"senha\": \"vini2964\",\n    \"idade\": 21,\n    \"admin\": true\n}"
+					"raw": "{\n        \"id\": 2,\n        \"nome\": \"abreu\",\n        \"cpf\": \"9876544321\",\n        \"email\": \"abreu@gmail.com\",\n        \"senha\": \"abreu\",\n        \"amigos\": []\n    }"
 				},
 				"url": {
-					"raw": "http://localhost:8080/usuarios/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						""
-					]
-				},
-				"description": "ed"
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/usuario/1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/xml",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/usuarios/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/Usuarios/",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\n\t\"nome\" : \"andrer\",\n\t\"idade\" :21,\n\t\"admin\" : true\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/Usuarios/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"Usuarios",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/Usuarios/1",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\n\t\"nome\" : \"andrerer\",\n\t\"idade\" :21,\n\t\"admin\" : true\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/Usuarios/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"Usuarios",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/Usuarios/",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/Usuarios/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"Usuarios",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/Usuarios/",
-			"request": {
-				"method": "OPTIONS",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/usuarios/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"usuarios",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DESAFIO FTP",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/4",
+					"raw": "http://localhost:8080/v1/usuarios/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -218,14 +31,14 @@
 					"path": [
 						"v1",
 						"usuarios",
-						"4"
+						""
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "DESAFIO FTP",
+			"name": "DESAFIO FTP USUARIO POR ID",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -234,7 +47,32 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/?nome=x",
+					"raw": "http://localhost:8080/v1/usuarios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"usuarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP USUARIO POR NOME",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/usuarios/?nome=vinicius",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -248,7 +86,7 @@
 					"query": [
 						{
 							"key": "nome",
-							"value": "x"
+							"value": "vinicius"
 						}
 					]
 				}
@@ -256,7 +94,7 @@
 			"response": []
 		},
 		{
-			"name": "DESAFIO FTP",
+			"name": "DESAFIO FTP TODOS USUARIOS",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -281,71 +119,7 @@
 			"response": []
 		},
 		{
-			"name": "DESAFIO FTP",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n        \"id\": 2,\n        \"nome\": \"vanessa\",\n        \"cpf\": \"235456743543\",\n        \"email\": \"vanessa@gmail.com\",\n        \"senha\": \"vanessa\",\n        \"amigos\": []\n    }"
-				},
-				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"v1",
-						"usuarios",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DESAFIO FTP",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"nome\": \"vinicius\",\n    \"cpf\": \"5338359367\",\n    \"email\": \"vinicius@gmail.com\",\n    \"senha\": \"vinicius\",\n    \"amigos\": [{\"id\": 2,\n        \"nome\": \"vini\",\n        \"cpf\": \"5338359367\",\n        \"email\": \"vini@gmail.com\",\n        \"senha\": \"vini\",\n    \t\"amigos\":[]\n    }]\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"v1",
-						"usuarios",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DESAFIO FTP",
+			"name": "DESAFIO FTP DELETE USUARIO",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -361,7 +135,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/2",
+					"raw": "http://localhost:8080/v1/usuarios/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -370,39 +144,14 @@
 					"path": [
 						"v1",
 						"usuarios",
-						"2"
+						"5"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "DESAFIO FTP LIST",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"v1",
-						"arquivos",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DESAFIO FTP UP",
+			"name": "DESAFIO FTP UP ENVIA ARQUIVOS ID",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -433,7 +182,32 @@
 			"response": []
 		},
 		{
-			"name": "DESAFIO FTP DELETE",
+			"name": "DESAFIO FTP LIST ARQUIVOS ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/arquivos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"arquivos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO FTP DELETA ARQUIVOS ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -442,7 +216,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/usuario/3/arquivo/kiss.png",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/1/arquivo/Dockerfile",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -452,9 +226,9 @@
 						"v1",
 						"arquivos",
 						"usuario",
-						"3",
+						"1",
 						"arquivo",
-						"kiss.png"
+						"Dockerfile"
 					]
 				}
 			},
@@ -470,7 +244,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos//usuario/3/paginas/0/arquivos/3",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/1/paginas/3/arquivos/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -479,20 +253,19 @@
 					"path": [
 						"v1",
 						"arquivos",
-						"",
 						"usuario",
-						"3",
+						"1",
 						"paginas",
-						"0",
+						"3",
 						"arquivos",
-						"3"
+						"2"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "DESAFIO FTP DOWN",
+			"name": "DESAFIO FTP DOWNLOAD ID NOME",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -501,7 +274,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/usuario/3/arquivo/semaphore.png",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/1/arquivo/declaracao.pdf",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -511,16 +284,16 @@
 						"v1",
 						"arquivos",
 						"usuario",
-						"3",
+						"1",
 						"arquivo",
-						"semaphore.png"
+						"declaracao.pdf"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "DESAFIO FTP COMP AMIGO",
+			"name": "DESAFIO FTP FAZER AMIZADE",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -529,7 +302,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/usuario/2/amigo/3",
+					"raw": "http://localhost:8080/v1/usuarios/usuario/1/amigo/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -539,9 +312,9 @@
 						"v1",
 						"usuarios",
 						"usuario",
-						"2",
+						"1",
 						"amigo",
-						"3"
+						"2"
 					]
 				}
 			},
@@ -557,7 +330,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/amigo/1/usuario/3",
+					"raw": "http://localhost:8080/v1/arquivos/amigo/2/usuario/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -567,9 +340,9 @@
 						"v1",
 						"arquivos",
 						"amigo",
-						"1",
+						"2",
 						"usuario",
-						"3"
+						"1"
 					]
 				}
 			},
@@ -585,7 +358,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/usuario/4/amigo/1",
+					"raw": "http://localhost:8080/v1/usuarios/usuario/3/amigo/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -595,9 +368,9 @@
 						"v1",
 						"usuarios",
 						"usuario",
-						"4",
+						"3",
 						"amigo",
-						"1"
+						"2"
 					]
 				}
 			},
