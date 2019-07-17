@@ -29,8 +29,8 @@ public class ArquivoService {
 
     public boolean enviar(MultipartFile arquivo,Usuario usuario){
         exceptionUtil.verificaUsuarioNome(usuario.getNome());
-
         FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
+
         try {
             return con.storeFile(arquivo.getOriginalFilename(), arquivo.getInputStream());
         } catch (IOException e) {
