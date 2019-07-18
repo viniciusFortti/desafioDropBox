@@ -1,19 +1,18 @@
 package desafio.ftp.ftpserver.v1.service;
 
+import desafio.ftp.ftpserver.v1.controller.Filewow;
 import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
 import desafio.ftp.ftpserver.v1.model.Usuario;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.Optional;
 
@@ -65,7 +64,7 @@ public class ArquivoService {
         }
     }
 
-        public void download(Usuario usuario, String nomeArquivo)  {
+    public void download(Usuario usuario, String nomeArquivo)  {
         exceptionUtil.verificaUsuarioNome(usuario.getNome());
         //exceptionUtil.extensaoArquivoInexistente(nomeArquivo);
         FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
@@ -75,6 +74,23 @@ public class ArquivoService {
         } catch (IOException e) {
             e.getMessage();
         }
+    }
+
+    public File[] list(Usuario usuario) throws IOException {
+        exceptionUtil.verificaUsuarioNome(usuario.getNome());
+        FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
+
+        FTPFile[] elements;
+        File[] files;
+
+        elements = con.listFiles();
+        files = new File[elements.length];
+
+        for (int i = 0; i < elements.length; i++) {
+            files[i] = new File(elements[i].getName().concat(elements[i].getUser()));
+        }
+        return files;
+
     }
 
 

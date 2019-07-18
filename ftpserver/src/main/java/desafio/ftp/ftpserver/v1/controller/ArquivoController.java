@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 
 @Api
@@ -74,7 +76,7 @@ public class ArquivoController {
             @ApiResponse(code = 404, message = "Arquivos ou usuario nao localizados revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "{id}")
-    public FTPFile[] listaTodosArquivos(@PathVariable Long id){
+    public FTPFile[] listaTodosArquivos(@PathVariable Long id) throws IOException {
         Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
         Usuario usuario = usuarioAux.get();
         return arquivoService.listar(usuario);
