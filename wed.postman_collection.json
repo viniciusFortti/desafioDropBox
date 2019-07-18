@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"id\": 2,\n        \"nome\": \"abreu\",\n        \"cpf\": \"9876544321\",\n        \"email\": \"abreu@gmail.com\",\n        \"senha\": \"abreu\",\n        \"amigos\": []\n    }"
+					"raw": "    {\n        \"id\": 3,\n        \"nome\": \"jacira\",\n        \"cpf\": \"932423562343\",\n        \"email\": \"jacira@gmail.com\",\n        \"senha\": \"jacira\",\n        \"amigos\": []\n    }"
 				},
 				"url": {
 					"raw": "http://localhost:8080/v1/usuarios/",
@@ -135,7 +135,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/5",
+					"raw": "http://localhost:8080/v1/usuarios/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -144,7 +144,7 @@
 					"path": [
 						"v1",
 						"usuarios",
-						"5"
+						"2"
 					]
 				}
 			},
@@ -166,7 +166,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/1",
+					"raw": "http://localhost:8080/v1/arquivos/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -175,7 +175,7 @@
 					"path": [
 						"v1",
 						"arquivos",
-						"1"
+						"3"
 					]
 				}
 			},
@@ -191,7 +191,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/1",
+					"raw": "http://localhost:8080/v1/arquivos/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -200,7 +200,7 @@
 					"path": [
 						"v1",
 						"arquivos",
-						"1"
+						"2"
 					]
 				}
 			},
@@ -216,7 +216,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/usuario/1/arquivo/Dockerfile",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/2/arquivo/group",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -226,9 +226,9 @@
 						"v1",
 						"arquivos",
 						"usuario",
-						"1",
+						"2",
 						"arquivo",
-						"Dockerfile"
+						"group"
 					]
 				}
 			},
@@ -244,7 +244,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/usuario/1/paginas/3/arquivos/2",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/1/paginas/2/arquivos/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -256,9 +256,9 @@
 						"usuario",
 						"1",
 						"paginas",
-						"3",
+						"2",
 						"arquivos",
-						"2"
+						"3"
 					]
 				}
 			},
@@ -274,7 +274,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/usuario/1/arquivo/declaracao.pdf",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/1/arquivo/LoginForm.java",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -286,7 +286,7 @@
 						"usuario",
 						"1",
 						"arquivo",
-						"declaracao.pdf"
+						"LoginForm.java"
 					]
 				}
 			},
@@ -302,7 +302,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/usuario/1/amigo/2",
+					"raw": "http://localhost:8080/v1/usuarios/usuario/3/amigo/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -312,9 +312,9 @@
 						"v1",
 						"usuarios",
 						"usuario",
-						"1",
+						"3",
 						"amigo",
-						"2"
+						"1"
 					]
 				}
 			},
@@ -358,7 +358,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/usuario/3/amigo/2",
+					"raw": "http://localhost:8080/v1/usuarios/usuario/1/amigo/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -368,7 +368,7 @@
 						"v1",
 						"usuarios",
 						"usuario",
-						"3",
+						"1",
 						"amigo",
 						"2"
 					]
