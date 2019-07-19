@@ -15,9 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
+
 
 @Api
 @RestController
@@ -45,11 +45,10 @@ public class ArquivoController {
     public ResponseEntity uploadArquivo(@RequestParam("file") MultipartFile arquivo, @PathVariable Long id){
         Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
         Usuario usuario = usuarioAux.get();
-        if(arquivo != null && id > 0) {
-            arquivoService.enviar(arquivo,usuario);
-            return new ResponseEntity<>(null, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+
+        arquivoService.enviar(arquivo,usuario);
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Deleta o arquivo no servidor ftp")
@@ -105,13 +104,12 @@ public class ArquivoController {
             @ApiResponse(code = 404, message = "Arquivo ou usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "/usuario/{id}/paginas/{paginas}/arquivos/{quantidade}")
-    public ResponseEntity<Page<FTPFile>> listarArquivosPaginados(@PathVariable(value = "id") Long id,
-                                                                 @PathVariable(value = "paginas") Integer pagina,
-                                                                 @PathVariable(value = "quantidade") Integer quantidade) {
+    public Page<FTPFile> listarArquivosPaginados(@PathVariable(value = "id") Long id,
+                                                 @PathVariable(value = "paginas") Integer pagina,
+                                                 @PathVariable(value = "quantidade") Integer quantidade) {
         Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
         Usuario usuario = usuarioAux.get();
-        return new ResponseEntity<>(this.arquivoService.listarPaginado(
-                pagina,quantidade,usuario),HttpStatus.OK);
+        return arquivoService.listarPaginado(pagina,quantidade,usuario);
 
     }
 

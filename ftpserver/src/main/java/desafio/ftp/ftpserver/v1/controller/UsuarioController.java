@@ -33,6 +33,7 @@ public class UsuarioController{
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "/{id}")
     public Optional<Usuario> buscarPorId(@PathVariable Long id) {
+
         return usuarioService.buscarUsuario(id);
 
     }

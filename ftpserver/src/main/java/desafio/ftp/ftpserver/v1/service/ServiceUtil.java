@@ -57,8 +57,7 @@ public class ServiceUtil {
         if (usuario.getAmigos().contains(amigo.getId())) {
             return true;
         }
-        else{return false;}
-
+        return false;
     }
 
 }

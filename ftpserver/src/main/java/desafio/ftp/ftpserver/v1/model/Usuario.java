@@ -1,12 +1,10 @@
 package desafio.ftp.ftpserver.v1.model;
 
+import desafio.ftp.ftpserver.v1.DTO.UsuarioDTO;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 
 import java.util.List;
-
 
 @Data
 public class Usuario {
@@ -20,4 +18,15 @@ public class Usuario {
     private List<Long> amigos;
 
 
+    public Usuario(Long id, String nome, String cpf, String email, List<Long> amigos) {
+        this.setId(id);
+        this.setNome(nome);
+        this.setCpf(cpf);
+        this.setEmail(email);
+        this.setAmigos(amigos);
+    }
+
+    public UsuarioDTO transformaParaDto(Usuario usuario){
+        return new UsuarioDTO(usuario);
+    }
 }

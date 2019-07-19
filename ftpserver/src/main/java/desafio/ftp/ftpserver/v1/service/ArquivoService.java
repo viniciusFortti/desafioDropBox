@@ -1,11 +1,10 @@
 package desafio.ftp.ftpserver.v1.service;
 
-import desafio.ftp.ftpserver.v1.controller.Filewow;
 import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
+import desafio.ftp.ftpserver.v1.exceptions.ListNotFoundException;
 import desafio.ftp.ftpserver.v1.model.Usuario;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 
-import java.nio.file.Files;
 import java.util.Optional;
 
 
@@ -31,6 +29,9 @@ public class ArquivoService {
 
     public boolean enviar(MultipartFile arquivo,Usuario usuario){
         exceptionUtil.verificaUsuarioNome(usuario.getNome());
+        exceptionUtil.extensaoArquivoInexistente(arquivo);
+        exceptionUtil.arquivoVazio(arquivo);
+
         FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
 
         try {
@@ -66,7 +67,6 @@ public class ArquivoService {
 
     public void download(Usuario usuario, String nomeArquivo)  {
         exceptionUtil.verificaUsuarioNome(usuario.getNome());
-        //exceptionUtil.extensaoArquivoInexistente(nomeArquivo);
         FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("/home/technocorp/Downloads/" + nomeArquivo);
@@ -76,35 +76,16 @@ public class ArquivoService {
         }
     }
 
-    public File[] list(Usuario usuario) throws IOException {
-        exceptionUtil.verificaUsuarioNome(usuario.getNome());
-        FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
-
-        FTPFile[] elements;
-        File[] files;
-
-        elements = con.listFiles();
-        files = new File[elements.length];
-
-        for (int i = 0; i < elements.length; i++) {
-            files[i] = new File(elements[i].getName().concat(elements[i].getUser()));
-        }
-        return files;
-
-    }
-
-
     public Page<FTPFile> listarPaginado(int pagina, int quantidade, Usuario usuario) {
         exceptionUtil.verificaUsuarioNome(usuario.getNome());
         FTPClient con = ServiceUtil.conexao(usuario.getNome(),usuario.getSenha());
 
         try {
             return ServiceUtil.paginacao(con.listFiles(), pagina, quantidade);
-
-        } catch (IOException e) {
-            e.getMessage();
-            return null;
+        }catch (IOException e) {
+            throw new ListNotFoundException("Impossivel retornar os arquivos paginados.");
         }
+
     }
 
     public FTPFile[] compartilharArquivos(Long idAmigo, Long id) {
@@ -113,7 +94,6 @@ public class ArquivoService {
 
             if (serviceUtil.verificaAmigo(idAmigo,id)){
                 Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
-
                 return listar(usuario.get());
 
             }

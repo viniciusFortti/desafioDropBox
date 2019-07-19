@@ -37,9 +37,17 @@ public class ExceptionUtil {
         }
     }
 
-    public void extensaoArquivoInexistente( String nome) {
-        if (!nome.contains(".")) {
+    //TODO verificar forma correta de validar arquivo
+    public void extensaoArquivoInexistente( MultipartFile arquivo) {
+    if (!arquivo.getOriginalFilename().contains(".")) {
             throw new MultiPartException("arquivo sem sua respectiva extensão verifique sua solicitação.");
+        }
+    }
+
+    //TODO verificar forma correta de validar arquivo
+    public void arquivoVazio( MultipartFile arquivo) {
+        if (arquivo.getSize() == 0) {
+            throw new MultiPartException("Arquivo vazio verifique sua solicitação.");
         }
     }
 }
