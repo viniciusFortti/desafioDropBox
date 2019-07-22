@@ -1,5 +1,6 @@
 package desafio.ftp.ftpserver.v1.controller;
 
+import desafio.ftp.ftpserver.v1.DTO.ArquivoDTO;
 import desafio.ftp.ftpserver.v1.service.ArquivoService;
 import desafio.ftp.ftpserver.v1.service.UsuarioService;
 import desafio.ftp.ftpserver.v1.model.Usuario;
@@ -7,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -43,7 +44,7 @@ public class ArquivoController {
     @PostMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity uploadArquivo(@RequestParam("file") MultipartFile arquivo, @PathVariable Long id){
-        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
         Usuario usuario = usuarioAux.get();
 
         arquivoService.enviar(arquivo,usuario);
@@ -61,7 +62,7 @@ public class ArquivoController {
     @DeleteMapping(value = "usuario/{id}/arquivo/{nome}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity deletaArquivo(@PathVariable Long id,@PathVariable String nome){
-        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
         Usuario usuario = usuarioAux.get();
         arquivoService.deletar(nome,usuario);
         return new ResponseEntity<>(null, HttpStatus.OK);
@@ -75,8 +76,8 @@ public class ArquivoController {
             @ApiResponse(code = 404, message = "Arquivos ou usuario nao localizados revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "{id}")
-    public FTPFile[] listaTodosArquivos(@PathVariable Long id) throws IOException {
-        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+    public ArrayList<ArquivoDTO> listaTodosArquivos(@PathVariable Long id) throws IOException {
+        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
         Usuario usuario = usuarioAux.get();
         return arquivoService.listar(usuario);
     }
@@ -90,7 +91,7 @@ public class ArquivoController {
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "usuario/{id}/arquivo/{nome}")
     public ResponseEntity download(@PathVariable Long id, @PathVariable String nome){
-        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
         Usuario usuario = usuarioAux.get();
         arquivoService.download(usuario,nome);
         return new ResponseEntity<>(null, HttpStatus.OK);
@@ -104,10 +105,10 @@ public class ArquivoController {
             @ApiResponse(code = 404, message = "Arquivo ou usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "/usuario/{id}/paginas/{paginas}/arquivos/{quantidade}")
-    public Page<FTPFile> listarArquivosPaginados(@PathVariable(value = "id") Long id,
-                                                 @PathVariable(value = "paginas") Integer pagina,
-                                                 @PathVariable(value = "quantidade") Integer quantidade) {
-        Optional<Usuario> usuarioAux = usuarioService.buscarUsuario(id);
+    public Page<ArquivoDTO> listarArquivosPaginados(@PathVariable(value = "id") Long id,
+                                                    @PathVariable(value = "paginas") Integer pagina,
+                                                    @PathVariable(value = "quantidade") Integer quantidade) {
+        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
         Usuario usuario = usuarioAux.get();
         return arquivoService.listarPaginado(pagina,quantidade,usuario);
 
@@ -121,7 +122,7 @@ public class ArquivoController {
             @ApiResponse(code = 404, message = "amigo ou usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "amigo/{idAmigo}/usuario/{id}")
-    public FTPFile[] listarArquivosAmigo(@PathVariable Long idAmigo, @PathVariable Long id){
+    public ArrayList<ArquivoDTO> listarArquivosAmigo(@PathVariable Long idAmigo, @PathVariable Long id){
         return arquivoService.compartilharArquivos(idAmigo,id);
 
     }

@@ -20,7 +20,4 @@ public class UsuarioDTO {
         this.setAmigos(usuario.getAmigos());
     }
 
-    public Usuario transformaParaObjeto(){
-        return new Usuario(id, nome,cpf,email,amigos);
-    }
 }

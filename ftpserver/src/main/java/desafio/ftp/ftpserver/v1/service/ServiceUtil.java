@@ -1,5 +1,6 @@
 package desafio.ftp.ftpserver.v1.service;
 
+import desafio.ftp.ftpserver.v1.DTO.ArquivoDTO;
 import desafio.ftp.ftpserver.v1.model.Usuario;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -9,7 +10,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,25 +33,25 @@ public class ServiceUtil {
         return con;
     }
 
-    public static Page<FTPFile> paginacao(FTPFile[] arquivos, int pagina, int quantidade) {
+    public static Page<ArquivoDTO> paginacao(ArrayList<ArquivoDTO> arquivos, int pagina, int quantidade) {
 
-        List<FTPFile> listaArquivos = new ArrayList<>();
+        List<ArquivoDTO> listaArquivos = new ArrayList<>();
 
-        for (FTPFile arquivo : arquivos) {
+        for (ArquivoDTO arquivo : arquivos) {
             listaArquivos.add(arquivo);
         }
         int maximoArquivos = ((quantidade*pagina)  > listaArquivos.size()) ? listaArquivos.size() : quantidade * (pagina);
 
-        Page<FTPFile> paginaArquivos = new PageImpl<>(listaArquivos.subList((pagina - 1) * quantidade, maximoArquivos), PageRequest.of(pagina, quantidade), maximoArquivos);
+        Page<ArquivoDTO> paginaArquivos = new PageImpl<>(listaArquivos.subList((pagina - 1) * quantidade, maximoArquivos), PageRequest.of(pagina, quantidade), maximoArquivos);
 
         return paginaArquivos;
     }
 
     public boolean verificaAmigo(Long idAmigo, Long id) {
-        Optional<Usuario> amigoAuxiliar = usuarioService.buscarUsuario(idAmigo);
+        Optional<Usuario> amigoAuxiliar = usuarioService.buscaUsuario(idAmigo);
         Usuario amigo = amigoAuxiliar.get();
 
-        Optional<Usuario> usuarioAuxiliar = usuarioService.buscarUsuario(id);
+        Optional<Usuario> usuarioAuxiliar = usuarioService.buscaUsuario(id);
         Usuario usuario = usuarioAuxiliar.get();
 
         if (usuario.getAmigos().contains(amigo.getId())) {

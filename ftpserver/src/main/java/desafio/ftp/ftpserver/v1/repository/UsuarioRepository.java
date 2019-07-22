@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UsuarioRepository extends MongoRepository<Usuario,Long> {
+public interface UsuarioRepository extends MongoRepository<Usuario, Long> {
 
     List<Usuario> findByNomeContainingIgnoreCase(String nome);
     Usuario findByNome(String nome);

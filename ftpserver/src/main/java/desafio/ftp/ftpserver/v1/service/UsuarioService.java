@@ -1,11 +1,15 @@
 package desafio.ftp.ftpserver.v1.service;
 
+import desafio.ftp.ftpserver.v1.DTO.ArquivoDTO;
+import desafio.ftp.ftpserver.v1.DTO.UsuarioDTO;
 import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
 import desafio.ftp.ftpserver.v1.model.Usuario;
 import desafio.ftp.ftpserver.v1.repository.UsuarioRepository;
+import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,49 +22,76 @@ public class UsuarioService {
     @Autowired
     ExceptionUtil exceptionUtil;
 
-    public Usuario salvar(Usuario usuario){
+    public UsuarioDTO salvar(Usuario usuario){
         exceptionUtil.verificaCamposUsuarios(usuario);
-        return usuarioRepository.save(usuario);}
+        usuarioRepository.save(usuario);
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
+        return usuarioDTO;
+    }
 
-    public Optional<Usuario> buscarUsuario(Long id) {
+    public UsuarioDTO buscarUsuario(Long id) {
         exceptionUtil.verificaUsuarioId(id);
-        return usuarioRepository.findById(id);}
+        Optional<Usuario> usuarioAux = usuarioRepository.findById(id);
+        UsuarioDTO usuario = new UsuarioDTO(usuarioAux.get());
+        return usuario;
+    }
 
-    public Usuario editarUsuario(Long id, Usuario usuario) {
+    public Optional<Usuario> buscaUsuario(Long id) {
+        exceptionUtil.verificaUsuarioId(id);
+        return usuarioRepository.findById(id);
+    }
+
+    public UsuarioDTO editarUsuario(Long id, Usuario usuario) {
         exceptionUtil.verificaCamposUsuarios(usuario);
         usuario.setId(id);
-        return usuarioRepository.save(usuario); }
+        usuarioRepository.save(usuario);
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
+        return usuarioDTO;
+    }
 
     public void removerUsuarioId(Long id)  {
-        exceptionUtil.verificaUsuarioId(id);
+        //exceptionUtil.verificaUsuarioId(id);
         usuarioRepository.deleteById(id);}
 
     public void removerUsuario(Usuario usuario)  {
-        exceptionUtil.verificaCamposUsuarios(usuario);
+        //exceptionUtil.verificaCamposUsuarios(usuario);
         usuarioRepository.delete(usuario);}
 
-    public List<Usuario> listarUsuarios() { return usuarioRepository.findAll();}
+    public List<UsuarioDTO> listarUsuarios() {
+        List<Usuario> usuariosAux = usuarioRepository.findAll();
+        List<UsuarioDTO> usuarios = new ArrayList<>();
+        for (Usuario usuarioAux : usuariosAux) {
+            UsuarioDTO usuario= new UsuarioDTO(usuarioAux);
+            usuarios.add(usuario);
+        }
+        return usuarios;
+    }
+    public List<UsuarioDTO> buscarPorNome(String nome){
+        List<Usuario> usuariosAux = usuarioRepository.findByNomeContainingIgnoreCase(nome);
+        List<UsuarioDTO> usuarios = new ArrayList<>();
+        for (Usuario usuarioAux : usuariosAux) {
+            UsuarioDTO usuario= new UsuarioDTO(usuarioAux);
+            usuarios.add(usuario);
+        }
 
-    public List<Usuario> buscarPorNome(String nome){
-        exceptionUtil.verificaUsuarioNome(nome);
-        return usuarioRepository.findByNomeContainingIgnoreCase(nome);}
+        return usuarios;
+    }
 
-    public Usuario adicionarAmigo(Long id,Long idAmigo){
+    public UsuarioDTO adicionarAmigo(Long id,Long idAmigo){
         exceptionUtil.verificaUsuarioId(id);
         exceptionUtil.verificaUsuarioId(idAmigo);
 
-        Optional<Usuario> usuarioAuxiliar = buscarUsuario(id);
+        Optional<Usuario> usuarioAuxiliar = usuarioRepository.findById(id);
         Usuario usuario = usuarioAuxiliar.get();
         usuario.getAmigos().add(idAmigo);
-
         return salvar(usuario);
 
     }
 
-    public Usuario deletarAmigo(Long id,Long idAmigo) {
+    public UsuarioDTO deletarAmigo(Long id,Long idAmigo) {
         exceptionUtil.verificaUsuarioId(id);
 
-        Optional<Usuario> usuarioAuxiliar = buscarUsuario(id);
+        Optional<Usuario> usuarioAuxiliar = usuarioRepository.findById(id);
         Usuario usuario = usuarioAuxiliar.get();
 
         if (usuario.getAmigos().contains(idAmigo)){

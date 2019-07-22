@@ -1,5 +1,6 @@
 package desafio.ftp.ftpserver.v1.controller;
 
+import desafio.ftp.ftpserver.v1.DTO.UsuarioDTO;
 import desafio.ftp.ftpserver.v1.login.UserManagerCustom;
 import desafio.ftp.ftpserver.v1.model.Usuario;
 import desafio.ftp.ftpserver.v1.service.UsuarioService;
@@ -32,8 +33,7 @@ public class UsuarioController{
             @ApiResponse(code = 404, message = "Usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "/{id}")
-    public Optional<Usuario> buscarPorId(@PathVariable Long id) {
-
+    public UsuarioDTO buscarPorId(@PathVariable Long id) {
         return usuarioService.buscarUsuario(id);
 
     }
@@ -46,7 +46,7 @@ public class UsuarioController{
             @ApiResponse(code = 404, message = "Usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping
-    public List<Usuario> buscarPorNome(@RequestParam String nome) {
+    public List<UsuarioDTO> buscarPorNome(@RequestParam String nome) {
         return usuarioService.buscarPorNome(nome);}
 
     @ApiOperation(value = "Lista todos usuarios")
@@ -57,7 +57,8 @@ public class UsuarioController{
             @ApiResponse(code = 404, message = "Usuarios nao localizados"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "/listar")
-    public List<Usuario> listarUsuarios() {
+    public List<UsuarioDTO>  listarUsuarios() {
+
         return usuarioService.listarUsuarios();
     }
 
@@ -68,7 +69,7 @@ public class UsuarioController{
             @ApiResponse(code = 403, message = "Recurso bloqueado para seu login"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @PostMapping
-    public Usuario salvar(@RequestBody Usuario usuario){
+    public UsuarioDTO salvar(@RequestBody Usuario usuario){
         UserManagerCustom.salvaUsuario(usuario.getNome(),usuario.getSenha());
         return usuarioService.salvar(usuario);
     }
@@ -81,7 +82,7 @@ public class UsuarioController{
             @ApiResponse(code = 404, message = "Usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @PutMapping(value = "/{id}")
-    public Usuario editarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {
+    public UsuarioDTO editarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {
         return usuarioService.editarUsuario(id,usuario);
     }
 
@@ -119,7 +120,7 @@ public class UsuarioController{
             @ApiResponse(code = 404, message = "Amigo ou usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @PutMapping(value = "usuario/{id}/amigo/{idAmigo}")
-    public Usuario adicionarAmigo(@PathVariable Long id, @PathVariable Long idAmigo){
+    public UsuarioDTO adicionarAmigo(@PathVariable Long id, @PathVariable Long idAmigo){
         return usuarioService.adicionarAmigo(id,idAmigo);
     }
 
@@ -131,7 +132,7 @@ public class UsuarioController{
             @ApiResponse(code = 404, message = "Amigo ou Usuario nao localizado revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @PostMapping(value = "usuario/{id}/amigo/{idAmigo}")
-    public Usuario deletarAmigo(@PathVariable Long id, @PathVariable Long idAmigo){
+    public UsuarioDTO deletarAmigo(@PathVariable Long id, @PathVariable Long idAmigo){
         return usuarioService.deletarAmigo(id,idAmigo);
 
     }

@@ -1,5 +1,6 @@
 package desafio.ftp.ftpserver.v1.service;
 
+import desafio.ftp.ftpserver.v1.DTO.ArquivoDTO;
 import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
 import desafio.ftp.ftpserver.v1.exceptions.ListNotFoundException;
 import desafio.ftp.ftpserver.v1.model.Usuario;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -54,11 +56,17 @@ public class ArquivoService {
         }
     }
 
-    public FTPFile[] listar(Usuario usuario)  {
+    public ArrayList<ArquivoDTO> listar(Usuario usuario)  {
         exceptionUtil.verificaUsuarioNome(usuario.getNome());
         FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
         try {
-            return con.listFiles();
+            FTPFile[] ftp =  con.listFiles();
+            ArrayList<ArquivoDTO> dto = new ArrayList<>();
+            for (FTPFile ftpFile : ftp) {
+                ArquivoDTO arquivo = new ArquivoDTO(ftpFile);
+                dto.add(arquivo);
+            }
+            return dto;
         } catch (IOException e) {
             e.getMessage();
             return null;
@@ -76,24 +84,20 @@ public class ArquivoService {
         }
     }
 
-    public Page<FTPFile> listarPaginado(int pagina, int quantidade, Usuario usuario) {
+    public Page<ArquivoDTO> listarPaginado(int pagina, int quantidade, Usuario usuario) {
         exceptionUtil.verificaUsuarioNome(usuario.getNome());
         FTPClient con = ServiceUtil.conexao(usuario.getNome(),usuario.getSenha());
 
-        try {
-            return ServiceUtil.paginacao(con.listFiles(), pagina, quantidade);
-        }catch (IOException e) {
-            throw new ListNotFoundException("Impossivel retornar os arquivos paginados.");
-        }
+            return ServiceUtil.paginacao(listar(usuario), pagina, quantidade);
 
     }
 
-    public FTPFile[] compartilharArquivos(Long idAmigo, Long id) {
+    public ArrayList<ArquivoDTO> compartilharArquivos(Long idAmigo, Long id) {
         exceptionUtil.verificaUsuarioId(id);
         exceptionUtil.verificaUsuarioId(idAmigo);
 
             if (serviceUtil.verificaAmigo(idAmigo,id)){
-                Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
+                Optional<Usuario> usuario = usuarioService.buscaUsuario(id);
                 return listar(usuario.get());
 
             }
