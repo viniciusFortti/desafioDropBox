@@ -1,13 +1,12 @@
 package desafio.ftp.ftpserver.v1.model;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
 @Data
 public class Usuario {
-
     @Id
     private Long id;
     private String nome;

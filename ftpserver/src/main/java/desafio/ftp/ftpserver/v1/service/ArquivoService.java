@@ -4,6 +4,9 @@ import desafio.ftp.ftpserver.v1.DTO.ArquivoDTO;
 import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
 import desafio.ftp.ftpserver.v1.exceptions.ListNotFoundException;
 import desafio.ftp.ftpserver.v1.model.Usuario;
+import lombok.Cleanup;
+import lombok.SneakyThrows;
+import lombok.Synchronized;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,16 +75,15 @@ public class ArquivoService {
             return null;
         }
     }
-
+    @SneakyThrows
+    @Synchronized
     public void download(Usuario usuario, String nomeArquivo)  {
         exceptionUtil.verificaUsuarioNome(usuario.getNome());
-        FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
-        try {
+        @Cleanup FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
+
             FileOutputStream fileOutputStream = new FileOutputStream("/home/technocorp/Downloads/" + nomeArquivo);
             con.retrieveFile(nomeArquivo, fileOutputStream);
-        } catch (IOException e) {
-            e.getMessage();
-        }
+
     }
 
     public Page<ArquivoDTO> listarPaginado(int pagina, int quantidade, Usuario usuario) {
