@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n    \t\"id\": 3,\n        \"nome\": \"joao\",\n        \"cpf\": \"06503259345\",\n        \"email\": \"joao@gmail.com\",\n        \"senha\": \"joao\",\n        \"amigos\": []\n    }"
+					"raw": "    {\n    \t\"id\": 4,\n        \"nome\": \"santiago\",\n        \"cpf\": \"0650323445745\",\n        \"email\": \"santiago@gmail.com\",\n        \"senha\": \"santiago\",\n        \"amigos\": []\n    }"
 				},
 				"url": {
 					"raw": "http://localhost:8080/v1/usuarios/",
@@ -47,7 +47,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/3",
+					"raw": "http://localhost:8080/v1/usuarios/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -56,7 +56,7 @@
 					"path": [
 						"v1",
 						"usuarios",
-						"3"
+						"5"
 					]
 				}
 			},
@@ -72,7 +72,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/?nome=u",
+					"raw": "http://localhost:8080/v1/usuarios/?nome=s",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -86,7 +86,7 @@
 					"query": [
 						{
 							"key": "nome",
-							"value": "u"
+							"value": "s"
 						}
 					]
 				}
@@ -119,6 +119,38 @@
 			"response": []
 		},
 		{
+			"name": "DESAFIO FTP EDITAR USUARIO",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 1,\n        \"nome\": \"vinicius\",\n        \"cpf\": \"06503259345\",\n        \"email\": \"vinicius@gmail.com\",\n        \"senha\": \"vincius\",\n        \"amigos\": [\n            2\n        ]\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/usuarios/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"usuarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "DESAFIO FTP DELETE USUARIO",
 			"request": {
 				"method": "DELETE",
@@ -135,7 +167,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/3",
+					"raw": "http://localhost:8080/v1/usuarios/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -144,7 +176,7 @@
 					"path": [
 						"v1",
 						"usuarios",
-						"3"
+						"5"
 					]
 				}
 			},
@@ -207,34 +239,6 @@
 			"response": []
 		},
 		{
-			"name": "DESAFIO FTP DELETA ARQUIVOS ID",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/usuario/2/arquivo/group",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"v1",
-						"arquivos",
-						"usuario",
-						"2",
-						"arquivo",
-						"group"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "DESAFIO FTP LISTAGEM PAGINADA",
 			"request": {
 				"method": "GET",
@@ -244,7 +248,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/usuario/1/paginas/2/arquivos/3",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/2/paginas/1/arquivos/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -254,11 +258,11 @@
 						"v1",
 						"arquivos",
 						"usuario",
-						"1",
-						"paginas",
 						"2",
+						"paginas",
+						"1",
 						"arquivos",
-						"3"
+						"2"
 					]
 				}
 			},
@@ -274,7 +278,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/arquivos/usuario/1/arquivo/LoginForm.java",
+					"raw": "http://localhost:8080/v1/arquivos/usuario/1/arquivo/lista_convidados.odt",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -286,7 +290,7 @@
 						"usuario",
 						"1",
 						"arquivo",
-						"LoginForm.java"
+						"lista_convidados.odt"
 					]
 				}
 			},
@@ -358,7 +362,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/usuarios/usuario/1/amigo/2",
+					"raw": "http://localhost:8080/v1/usuarios/usuario/2/amigo/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -368,9 +372,9 @@
 						"v1",
 						"usuarios",
 						"usuario",
-						"1",
+						"2",
 						"amigo",
-						"2"
+						"3"
 					]
 				}
 			},
