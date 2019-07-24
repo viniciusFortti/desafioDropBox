@@ -1,11 +1,10 @@
 package desafio.ftp.ftpserver.v1.service;
 
-import desafio.ftp.ftpserver.v1.DTO.ArquivoDTO;
 import desafio.ftp.ftpserver.v1.DTO.UsuarioDTO;
 import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
+import desafio.ftp.ftpserver.v1.login.UserManagerCustom;
 import desafio.ftp.ftpserver.v1.model.Usuario;
 import desafio.ftp.ftpserver.v1.repository.UsuarioRepository;
-import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +23,7 @@ public class UsuarioService {
 
     public UsuarioDTO salvar(Usuario usuario){
         exceptionUtil.verificaCamposUsuarios(usuario);
+        UserManagerCustom.salvaUsuario(usuario.getNome(),usuario.getSenha());
         usuarioRepository.save(usuario);
         UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
         return usuarioDTO;
@@ -50,11 +50,11 @@ public class UsuarioService {
     }
 
     public void removerUsuarioId(Long id)  {
-        //exceptionUtil.verificaUsuarioId(id);
+        exceptionUtil.verificaUsuarioId(id);
         usuarioRepository.deleteById(id);}
 
     public void removerUsuario(Usuario usuario)  {
-        //exceptionUtil.verificaCamposUsuarios(usuario);
+        exceptionUtil.verificaCamposUsuarios(usuario);
         usuarioRepository.delete(usuario);}
 
     public List<UsuarioDTO> listarUsuarios() {

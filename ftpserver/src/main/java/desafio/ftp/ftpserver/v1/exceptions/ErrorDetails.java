@@ -1,5 +1,6 @@
 package desafio.ftp.ftpserver.v1.exceptions;
 
+
 public class ErrorDetails {
     private String title;
     private int status;

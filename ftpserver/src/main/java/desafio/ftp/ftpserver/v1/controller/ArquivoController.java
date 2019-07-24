@@ -15,9 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Optional;
+
 
 
 @Api
@@ -44,9 +44,7 @@ public class ArquivoController {
     @PostMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity uploadArquivo(@RequestParam("file") MultipartFile arquivo, @PathVariable Long id){
-        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
-        Usuario usuario = usuarioAux.get();
-
+        Usuario usuario = usuarioService.buscaUsuario(id).get();
         arquivoService.enviar(arquivo,usuario);
 
         return new ResponseEntity<>(null, HttpStatus.OK);
@@ -62,8 +60,8 @@ public class ArquivoController {
     @DeleteMapping(value = "usuario/{id}/arquivo/{nome}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity deletaArquivo(@PathVariable Long id,@PathVariable String nome){
-        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
-        Usuario usuario = usuarioAux.get();
+        Usuario usuario = usuarioService.buscaUsuario(id).get();
+
         arquivoService.deletar(nome,usuario);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
@@ -76,9 +74,8 @@ public class ArquivoController {
             @ApiResponse(code = 404, message = "Arquivos ou usuario nao localizados revise os parametros"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "{id}")
-    public ArrayList<ArquivoDTO> listaTodosArquivos(@PathVariable Long id) throws IOException {
-        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
-        Usuario usuario = usuarioAux.get();
+    public ArrayList<ArquivoDTO> listaTodosArquivos(@PathVariable Long id){
+        Usuario usuario = usuarioService.buscaUsuario(id).get();
         return arquivoService.listar(usuario);
     }
 
@@ -91,8 +88,7 @@ public class ArquivoController {
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "usuario/{id}/arquivo/{nome}")
     public ResponseEntity download(@PathVariable Long id, @PathVariable String nome){
-        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
-        Usuario usuario = usuarioAux.get();
+        Usuario usuario = usuarioService.buscaUsuario(id).get();
         arquivoService.download(usuario,nome);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
@@ -108,10 +104,8 @@ public class ArquivoController {
     public Page<ArquivoDTO> listarArquivosPaginados(@PathVariable(value = "id") Long id,
                                                     @PathVariable(value = "paginas") Integer pagina,
                                                     @PathVariable(value = "quantidade") Integer quantidade) {
-        Optional<Usuario> usuarioAux = usuarioService.buscaUsuario(id);
-        Usuario usuario = usuarioAux.get();
+        Usuario usuario = usuarioService.buscaUsuario(id).get();
         return arquivoService.listarPaginado(pagina,quantidade,usuario);
-
     }
 
     @ApiOperation(value = "Lista todos os arquivos de um amigo")

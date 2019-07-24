@@ -58,7 +58,6 @@ public class UsuarioController{
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @GetMapping(value = "/listar")
     public List<UsuarioDTO>  listarUsuarios() {
-
         return usuarioService.listarUsuarios();
     }
 
@@ -70,7 +69,6 @@ public class UsuarioController{
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @PostMapping
     public UsuarioDTO salvar(@RequestBody Usuario usuario){
-        UserManagerCustom.salvaUsuario(usuario.getNome(),usuario.getSenha());
         return usuarioService.salvar(usuario);
     }
 
