@@ -10,9 +10,11 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,8 +70,10 @@ public class UsuarioController{
             @ApiResponse(code = 403, message = "Recurso bloqueado para seu login"),
             @ApiResponse(code = 500,message= "Ocorreu um erro no servidor.")})
     @PostMapping
-    public UsuarioDTO salvar(@RequestBody Usuario usuario){
-        return usuarioService.salvar(usuario);
+    public ResponseEntity salvar(@Valid @RequestBody Usuario usuario){
+        usuarioService.salvar(usuario);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+
     }
 
     @ApiOperation(value = "Edita o usuario com seu id e seus dados a alterar")

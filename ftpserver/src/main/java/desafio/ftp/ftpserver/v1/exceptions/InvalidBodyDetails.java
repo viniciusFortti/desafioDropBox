@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ResourceNotFoundDetails  {
+public class InvalidBodyDetails {
 
     private String title;
     private int status;

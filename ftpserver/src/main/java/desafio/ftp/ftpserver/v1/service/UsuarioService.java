@@ -7,7 +7,6 @@ import desafio.ftp.ftpserver.v1.model.Usuario;
 import desafio.ftp.ftpserver.v1.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +27,6 @@ public class UsuarioService {
         UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
         return usuarioDTO;
     }
-
     public UsuarioDTO buscarUsuario(Long id) {
         exceptionUtil.verificaUsuarioId(id);
         Optional<Usuario> usuarioAux = usuarioRepository.findById(id);
@@ -67,6 +65,7 @@ public class UsuarioService {
         return usuarios;
     }
     public List<UsuarioDTO> buscarPorNome(String nome){
+        exceptionUtil.verificaUsuarioNome(nome);
         List<Usuario> usuariosAux = usuarioRepository.findByNomeContainingIgnoreCase(nome);
         List<UsuarioDTO> usuarios = new ArrayList<>();
         for (Usuario usuarioAux : usuariosAux) {

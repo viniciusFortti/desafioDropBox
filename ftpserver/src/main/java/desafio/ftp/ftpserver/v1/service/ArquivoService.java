@@ -3,6 +3,7 @@ package desafio.ftp.ftpserver.v1.service;
 import desafio.ftp.ftpserver.v1.DTO.ArquivoDTO;
 import desafio.ftp.ftpserver.v1.exceptions.ExceptionUtil;
 import desafio.ftp.ftpserver.v1.model.Usuario;
+import lombok.Cleanup;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,6 @@ public class ArquivoService {
 
     public boolean enviar(MultipartFile arquivo,Usuario usuario){
         exceptionUtil.verificaUsuarioNome(usuario.getNome());
-        exceptionUtil.extensaoArquivoInexistente(arquivo);
-        exceptionUtil.arquivoVazio(arquivo);
 
         FTPClient con = ServiceUtil.conexao(usuario.getNome(), usuario.getSenha());
 

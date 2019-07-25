@@ -19,35 +19,14 @@ public class ExceptionUtil {
     }
 
     public void verificaUsuarioNome(String nome){
-        Usuario usuario = usuarioRepository.findByNome(nome);
-        if(usuario == null) {
-            throw new ResourceNotFoundException("Nenhum usuario encontrado com o parametro " + nome);
+
+        if(usuarioRepository.findByNomeContainingIgnoreCase(nome).isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum usuario encontrado com : " + nome);
         }
     }
 
     public void verificaCamposUsuarios(Usuario usuario) {
 
-        Boolean nomeUsuario = usuario.getNome() == null;
-        Boolean cpfUsuario = usuario.getCpf() == null;
-        Boolean emailUsuario = usuario.getEmail() == null;
-        Boolean senhaUsuario = usuario.getSenha() == null;
-
-        if(nomeUsuario || cpfUsuario || emailUsuario ||senhaUsuario ){
-            throw new ResourceNotFoundException("Campo de usuario nulo, verifique sua requisição");
-        }
     }
 
-    //TODO verificar forma correta de validar arquivo
-    public void extensaoArquivoInexistente( MultipartFile arquivo) {
-    if (!arquivo.getOriginalFilename().contains(".")) {
-            throw new MultiPartException("arquivo sem sua respectiva extensão verifique sua solicitação.");
-        }
-    }
-
-    //TODO verificar forma correta de validar arquivo
-    public void arquivoVazio( MultipartFile arquivo) {
-        if (arquivo.getSize() == 0) {
-            throw new MultiPartException("Arquivo vazio verifique sua solicitação.");
-        }
-    }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public class UsuarioDTO {
     private Long id;
     private String nome;
-    private String cpf;
+    private CharSequence cpf;
     private String email;
     private List<Long> amigos;
 
